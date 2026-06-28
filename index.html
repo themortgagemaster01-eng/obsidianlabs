@@ -91,7 +91,8 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   .ava-head,.ava-body{position:relative;z-index:3}
   .ava-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);background:rgba(200,205,216,.05)}
-  .ava-head .av{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-weight:800;font-size:18px;background:linear-gradient(135deg,#eef1f6,#aeb4c2);color:#0a0a0e}
+  .ava-head .av{width:52px;height:52px;border-radius:14px;overflow:hidden;flex:none;box-shadow:0 6px 18px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.12)}
+  .ava-head .av img{width:100%;height:100%;object-fit:cover;display:block}
   .ava-head h3{font-family:var(--disp);font-size:19px} .ava-head p{font-size:12px;color:#aeb4c2}
   .ava-body{padding:18px 22px 22px} .chat{display:flex;flex-direction:column;gap:10px;min-height:170px;margin-bottom:14px}
   .msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5}
@@ -400,7 +401,7 @@
   <div class="center reveal"><div class="eyebrow">See it for yourself</div><h2 class="h2 disp">Meet <span class="grad">Ava</span> — the AI we build in</h2>
   <p class="sub">The kind of always-on assistant we put to work on your site. Ask her something.</p></div>
   <div class="ava glass reveal"><div class="beam"></div>
-    <div class="ava-head"><div class="av">A</div><div><h3 class="disp">Ava · Obsidian Labs</h3><p>● online — replies in seconds</p></div></div>
+    <div class="ava-head"><div class="av"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&amp;fit=crop&amp;w=160&amp;q=75&amp;crop=faces" alt="Ava"></div><div><h3 class="disp">Ava · Obsidian Labs</h3><p>● online — replies in seconds</p></div></div>
     <div class="ava-body">
       <div class="chat" id="chat"><div class="msg ava">Hi! I'm Ava — I can answer questions, capture leads, and book calls 24/7, exactly like the assistant we'd build into your site. What would you like to know?</div></div>
       <div class="sugg" id="sugg"></div>
