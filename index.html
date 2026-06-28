@@ -51,7 +51,11 @@
 
   /* hero */
   .hero{padding:60px 0 24px;text-align:center;position:relative}
-  .heromark{width:clamp(150px,26vw,210px);height:auto;margin:0 auto 18px;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(200,205,216,.12)}
+  .heromark{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 22px;position:relative}
+  .heromark::before{content:"";position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(190,196,210,.20),transparent 65%);z-index:-1;pointer-events:none}
+  .crest{width:clamp(58px,9vw,84px);height:auto;filter:drop-shadow(0 10px 26px rgba(174,180,194,.35))}
+  .wordmark{font-family:var(--disp);font-weight:600;font-size:clamp(20px,3vw,27px);letter-spacing:.42em;text-transform:uppercase;background:linear-gradient(180deg,#f4f6fa,#aeb4c2 60%,#8b91a0);-webkit-background-clip:text;background-clip:text;color:transparent;padding-left:.42em}
+  .wordmark+.tagrule{font-family:var(--body,Inter);font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:#9aa0ad}
   .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,7vw,72px);line-height:1.02;margin:6px auto 16px;max-width:15ch;letter-spacing:.5px}
   .hero p{color:#c4c9d4;max-width:600px;margin:0 auto 22px;font-size:18px}
   .pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
@@ -141,7 +145,20 @@
 </div></div>
 
 <section class="hero"><div class="wrap">
-  <img class="heromark reveal" src="logo.jpg" alt="Obsidian Labs">
+  <div class="heromark reveal">
+    <svg class="crest" viewBox="0 0 80 112" fill="none" aria-label="Obsidian Labs">
+      <defs><linearGradient id="pl" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f6f8fc"/><stop offset=".5" stop-color="#aeb4c2"/><stop offset="1" stop-color="#646977"/>
+      </linearGradient></defs>
+      <path d="M40 3 L71 41 L40 109 L9 41 Z" stroke="url(#pl)" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M9 41 L71 41" stroke="url(#pl)" stroke-width="1.2" opacity=".85"/>
+      <path d="M40 3 L40 41 M24 23 L40 41 L56 23" stroke="url(#pl)" stroke-width="1" opacity=".6"/>
+      <path d="M24 41 L40 73 L56 41" stroke="url(#pl)" stroke-width="1" opacity=".5"/>
+      <path d="M9 41 L40 109 L71 41" stroke="url(#pl)" stroke-width=".7" opacity=".3"/>
+    </svg>
+    <div class="wordmark">Obsidian Labs</div>
+    <div class="tagrule">Web Design · Mobile Apps · Lead Generation</div>
+  </div>
   <h1 class="disp reveal">The digital presence your business <span class="grad">deserves.</span></h1>
   <p class="reveal">Premium websites, mobile apps, and AI-powered lead generation — engineered to turn attention into customers.</p>
   <div class="pills reveal"><span>Web Design</span><span>Mobile App Development</span><span>Lead Generation</span></div>
