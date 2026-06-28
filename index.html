@@ -32,7 +32,7 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)} .reveal.in{opacity:1;transform:none}
   /* ambient */
   .ambient{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-  .blob{position:absolute;border-radius:50%;filter:blur(95px);opacity:.4;mix-blend-mode:screen}
+  .blob{position:absolute;border-radius:50%;filter:blur(95px);opacity:.32;mix-blend-mode:screen}
   .blob.b1{width:560px;height:560px;left:-150px;top:-110px;background:radial-gradient(circle,rgba(220,225,235,.5),transparent 70%);animation:d1 26s ease-in-out infinite}
   .blob.b2{width:640px;height:640px;right:-190px;top:26%;background:radial-gradient(circle,rgba(150,160,190,.36),transparent 70%);animation:d2 32s ease-in-out infinite}
   .blob.b3{width:520px;height:520px;left:30%;bottom:-190px;background:radial-gradient(circle,rgba(120,130,160,.3),transparent 70%);animation:d3 28s ease-in-out infinite}
@@ -122,9 +122,14 @@
   footer img{width:46px;height:46px;border-radius:11px;margin:0 auto 12px;object-fit:cover}
   footer .fl{font-family:var(--disp);color:#fff;font-size:22px;margin-bottom:6px;letter-spacing:.5px}
   .flag{position:fixed;top:0;left:0;z-index:99;background:linear-gradient(120deg,#eef1f6,#aeb4c2);color:#0a0a0e;font-size:11px;font-weight:800;padding:5px 12px;border-bottom-right-radius:10px;letter-spacing:.5px}
+
+  /* full-page marble background */
+  .marble{position:fixed;inset:0;z-index:-3;background:url('marble.jpg') center/cover no-repeat}
+  .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.78),rgba(8,8,11,.88))}
 </style>
 </head>
 <body>
+<div class="marble"></div>
 <div class="ambient"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="noise"></div><div class="cglow" id="cglow"></div>
 <div class="flag">DEMO — Obsidian Labs</div>
