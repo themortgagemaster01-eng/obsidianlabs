@@ -498,13 +498,14 @@ function runScan(){
   var load=document.getElementById('scanload');document.getElementById('scoring').classList.remove('on');load.classList.add('on');
   var li=0,lt=document.getElementById('scanlt');lt.textContent=LSTEPS[0];var iv=setInterval(function(){li=(li+1)%LSTEPS.length;lt.textContent=LSTEPS[li];},1700);
   var api='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&category=accessibility&category=seo&category=best-practices&url='+encodeURIComponent(url);
-  var done=false;
+  var done=false,fin=function(){clearInterval(iv);clearTimeout(killer);};
+  var killer=setTimeout(function(){if(done)return;done=true;fin();fallbackScan(url);},15000);
   fetch(api).then(function(r){return r.json();}).then(function(d){
-    if(done)return;done=true;clearInterval(iv);
+    if(done)return;done=true;fin();
     if(!d.lighthouseResult||!d.lighthouseResult.categories)throw new Error('no result');
     var c=d.lighthouseResult.categories,g=function(k){return Math.round(((c[k]&&c[k].score)||0)*100);};
     showResult(url,g('performance'),g('accessibility'),g('seo'),g('best-practices'),false);
-  }).catch(function(){if(done)return;done=true;clearInterval(iv);fallbackScan(url);});
+  }).catch(function(){if(done)return;done=true;fin();fallbackScan(url);});
 }
 function showResult(url,perf,a11y,seo,bp,isEst){
   document.getElementById('scanload').classList.remove('on');
