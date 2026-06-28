@@ -127,6 +127,20 @@
   footer .fl{font-family:var(--disp);color:#fff;font-size:22px;margin-bottom:6px;letter-spacing:.5px}
   .flag{position:fixed;top:0;left:0;z-index:99;background:linear-gradient(120deg,#eef1f6,#aeb4c2);color:#0a0a0e;font-size:11px;font-weight:800;padding:5px 12px;border-bottom-right-radius:10px;letter-spacing:.5px}
 
+  /* showcase gallery (luxury staggered cards) */
+  #showcase{padding:34px 0 6px}
+  .shelf{display:flex;justify-content:center;align-items:flex-end;gap:14px;margin-top:34px;padding:30px 4px 14px}
+  .scard{position:relative;flex:0 0 auto;width:clamp(116px,15vw,200px);aspect-ratio:.62;border-radius:18px;overflow:hidden;border:1px solid rgba(238,241,246,.14);box-shadow:0 24px 60px rgba(0,0,0,.55);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;text-decoration:none}
+  .scard img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.72) contrast(1.05);transition:filter .6s,transform .9s ease}
+  .scard .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,9,.86) 8%,rgba(6,6,9,.04) 46%)}
+  .scard .lbl{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--disp);font-size:clamp(15px,1.6vw,20px);letter-spacing:.04em;color:#f3f5fa;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+  .scard:hover{transform:translateY(-10px);box-shadow:0 34px 80px rgba(0,0,0,.6)}
+  .scard:hover img{filter:grayscale(0) brightness(.96) contrast(1.05);transform:scale(1.06)}
+  .scard.feat{width:clamp(150px,18.5vw,244px);aspect-ratio:.56;transform:translateY(-26px);border-color:rgba(238,241,246,.3);box-shadow:0 36px 90px rgba(0,0,0,.65),0 0 60px rgba(190,196,210,.18)}
+  .scard.feat:hover{transform:translateY(-36px)}
+  .tier{font-family:var(--body,Inter);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#9aa0ad;margin-bottom:4px}
+  @media(max-width:720px){.shelf{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:18px}.scard{scroll-snap-align:center;width:clamp(140px,46vw,178px)}.scard.feat{transform:none;width:clamp(160px,52vw,200px)}.scard.feat:hover{transform:translateY(-10px)}}
+
   /* full-page marble background */
   .marble{position:fixed;inset:0;z-index:-3;background:url('marble.jpg') center/cover no-repeat}
   .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.5),rgba(8,8,11,.62))}
@@ -197,6 +211,19 @@
   </div>
 </div></section>
 
+<!-- SHOWCASE -->
+<section id="showcase"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">What we build</div><h2 class="h2 disp">Crafted for businesses that <span class="grad">refuse to blend in</span></h2>
+  <p class="sub">From first impression to closed sale — every surface engineered to convert.</p></div>
+  <div class="shelf">
+    <a class="scard reveal" href="#pricing"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&amp;fit=crop&amp;w=600&amp;q=72" alt="Web Design"><div class="scrim"></div><div class="lbl">Web Design</div></a>
+    <a class="scard reveal" href="#pricing"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&amp;fit=crop&amp;w=600&amp;q=72" alt="Mobile Apps"><div class="scrim"></div><div class="lbl">Mobile Apps</div></a>
+    <a class="scard feat reveal" href="#pricing"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=720&amp;q=75" alt="AI Agents"><div class="scrim"></div><div class="lbl">AI Agents</div></a>
+    <a class="scard reveal" href="#pricing"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=600&amp;q=72" alt="Lead Generation"><div class="scrim"></div><div class="lbl">Lead Generation</div></a>
+    <a class="scard reveal" href="#pricing"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&amp;fit=crop&amp;w=600&amp;q=72" alt="E-Commerce"><div class="scrim"></div><div class="lbl">E-Commerce</div></a>
+  </div>
+</div></section>
+
 <!-- BEFORE / AFTER -->
 <section id="work"><div class="wrap">
   <div class="center reveal"><div class="eyebrow">The transformation</div><h2 class="h2 disp">Before vs. after Obsidian Labs</h2>
@@ -240,13 +267,13 @@
   <div class="center reveal"><div class="eyebrow">Investment</div><h2 class="h2 disp">Built once. Working for you forever.</h2>
   <p class="sub">Transparent starting points — we scope the exact number on a quick call.</p></div>
   <div class="price-grid">
-    <div class="price glass reveal"><div class="nm">Website Transformation</div><div class="pr">$2,500<small> +</small></div>
+    <div class="price glass reveal"><div class="tier">Launch</div><div class="nm">Website Transformation</div><div class="pr">$2,500<small> +</small></div>
       <ul><li>Premium, fast, mobile-perfect rebuild</li><li>Your brand &amp; reviews up front</li><li>Lead capture + click-to-call/book</li><li>Local SEO foundations</li></ul>
       <a class="btn ghost" href="#pricing" style="width:100%">Start here</a></div>
-    <div class="price glass feat reveal"><div class="badge2">Most popular</div><div class="nm">AI Automation</div><div class="pr">$5,000<small> +</small></div>
+    <div class="price glass feat reveal"><div class="badge2">Most popular</div><div class="tier">Dominate</div><div class="nm">AI Automation</div><div class="pr">$5,000<small> +</small></div>
       <ul><li>Everything in Transformation</li><li>AI receptionist + lead capture</li><li>AI voice calls (answer &amp; follow-up)</li><li>CRM follow-up that closes leads</li></ul>
       <a class="btn pri" href="#pricing" style="width:100%">Book a call</a></div>
-    <div class="price glass reveal"><div class="nm">Custom App</div><div class="pr">$15,000<small> +</small></div>
+    <div class="price glass reveal"><div class="tier">Obsidian Elite</div><div class="nm">Custom App</div><div class="pr">$15,000<small> +</small></div>
       <ul><li>Bespoke web or mobile app</li><li>Built around your exact workflow</li><li>AI + automation baked in</li><li>Ongoing support &amp; iteration</li></ul>
       <a class="btn ghost" href="#pricing" style="width:100%">Let's talk</a></div>
   </div>
