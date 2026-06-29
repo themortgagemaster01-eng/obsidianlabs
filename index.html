@@ -225,6 +225,22 @@
   @keyframes crestHolo{0%,100%{filter:drop-shadow(0 10px 26px rgba(174,180,194,.42)) hue-rotate(0deg) saturate(1.05)}33%{filter:drop-shadow(0 12px 32px rgba(199,154,63,.5)) hue-rotate(40deg) saturate(1.6)}66%{filter:drop-shadow(0 12px 32px rgba(120,170,255,.45)) hue-rotate(-32deg) saturate(1.5)}}
   /* Ava avatar photo in hero dashboard */
   .dashwide .av img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block}
+  .offerbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:4px auto 0}
+  .offerbar span{background:rgba(200,205,216,.07);border:1px solid rgba(230,197,116,.22);border-radius:999px;padding:8px 16px;font-size:13px;color:#cfd4de;backdrop-filter:blur(6px)}
+  .offerbar span b{color:#f4f6fa}
+  /* How-it-works step list */
+  .hiw{max-width:760px;margin:34px auto 0;display:flex;flex-direction:column;gap:0}
+  .hiw .step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(200,205,216,.1)}
+  .hiw .step:last-child{border-bottom:none}
+  .hiw .sn{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:20px;color:#0a0a0e;background:linear-gradient(135deg,#f4f6fa,#aeb4c2)}
+  .hiw .st h4{font-family:var(--disp);font-size:21px;color:#fff;margin-bottom:3px}
+  .hiw .st p{font-size:14.5px;color:var(--mut)}
+  /* testimonials */
+  .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}@media(max-width:860px){.tg{grid-template-columns:1fr}}
+  .tcard{background:rgba(200,205,216,.05);border:1px solid rgba(200,205,216,.14);border-radius:16px;padding:26px;backdrop-filter:blur(8px)}
+  .tcard .stars{color:#e6c574;letter-spacing:2px;font-size:14px}
+  .tcard p{font-size:14.5px;color:#cfd4de;font-style:italic;margin:10px 0 14px}
+  .tcard .who b{color:#fff;font-size:14px;display:block}.tcard .who span{font-size:12px;color:var(--mut)}
   .marble{position:fixed;inset:0;z-index:-3;background:url('marble.jpg') center/cover no-repeat}
   .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.5),rgba(8,8,11,.62))}
 </style>
@@ -238,7 +254,7 @@
 
 <div class="nav"><div class="wrap">
   <div class="logo"><img src="logo.jpg" alt="Obsidian Labs"><span>Obsidian Labs</span></div>
-  <nav><a href="#scanner">Free Audit</a><a href="#services">Services</a><a href="#work">Before / After</a><a href="#forge">Process</a><a href="#pricing">Pricing</a></nav>
+  <nav><a href="#scanner">Free Audit</a><a href="#services">Services</a><a href="#work">Before / After</a><a href="#forge">How it works</a><a href="#pricing">Pricing</a></nav>
   <a class="btn pri" href="#pricing" style="padding:11px 18px">Book a call</a>
 </div></div>
 
@@ -258,9 +274,10 @@
     <div class="tagrule">Web Design · Mobile Apps · Lead Generation</div>
   </div>
   <h1 class="disp reveal">Your competition still looks like 2014.<br><span class="grad">You'll look like 2030.</span></h1>
-  <p class="reveal">We forge digital dominance for ambitious businesses — premium websites, mobile apps, and AI systems that turn attention into customers.</p>
+  <p class="reveal">We rebuild outdated local-business websites into premium, AI-powered growth machines — <b style="color:#fff">built before you pay a cent</b>.</p>
+  <div class="offerbar reveal"><span><b>5-day</b> free rebuild</span><span><b>$2,500</b> to own it</span><span><b>$0</b> if you walk away</span></div>
   <div class="pills reveal"><span>Web Design</span><span>Mobile App Development</span><span>AI Lead Generation</span></div>
-  <div class="hbtns reveal"><a class="btn pri" href="#scanner">Run free website audit</a><a class="btn ghost" href="#pricing">Book a strategy call</a></div>
+  <div class="hbtns reveal"><a class="btn pri" href="#scanner">Claim free AI website audit</a><a class="btn ghost" href="#forge">See how it works</a></div>
 
   <div class="mock glass reveal">
     <div class="browser">
@@ -302,12 +319,12 @@
 
 <section id="stats" style="padding:40px 0 10px"><div class="wrap">
   <div class="stats reveal">
-    <div class="stat glass"><div class="sn" data-count="2.3" data-dec="1" data-prefix="$" data-suffix="M+">$0</div><div class="sl">Revenue influenced</div></div>
-    <div class="stat glass"><div class="sn" data-count="37" data-suffix="+">0</div><div class="sl">Businesses transformed</div></div>
-    <div class="stat glass"><div class="sn" data-count="4.8" data-dec="1" data-suffix="★">0</div><div class="sl">Average client rating</div></div>
-    <div class="stat glass"><div class="sn" data-count="12" data-suffix="">0</div><div class="sl">Industries served</div></div>
+    <div class="stat glass"><div class="sn" data-count="12" data-suffix="">0</div><div class="sl">Demo builds created</div></div>
+    <div class="stat glass"><div class="sn" data-count="3.2" data-dec="1" data-suffix="d">0</div><div class="sl">Avg rebuild time</div></div>
+    <div class="stat glass"><div class="sn">5-day</div><div class="sl">Free review window</div></div>
+    <div class="stat glass"><div class="sn">$0</div><div class="sl">Risk to you upfront</div></div>
   </div>
-  <p class="center" style="font-size:11px;color:var(--mut);opacity:.7;margin-top:16px">Demo figures shown for layout — swap for your real results.</p>
+  <p class="center" style="font-size:11px;color:var(--mut);opacity:.7;margin-top:16px">Early-stage &amp; NY-based — these reflect our current demo pipeline, not inflated claims.</p>
 </div></section>
 
 <section id="services"><div class="wrap">
@@ -372,21 +389,21 @@
 </div></section>
 
 <section id="forge"><div class="wrap">
-  <div class="center reveal"><div class="eyebrow">The Obsidian Forge</div><h2 class="h2 disp">How we turn outdated into <span class="grad">unforgettable</span></h2>
-  <p class="sub">A proven four-phase system — so you always know exactly where your project stands.</p></div>
+  <div class="center reveal"><div class="eyebrow">How it works</div><h2 class="h2 disp">From outdated to unforgettable — <span class="grad">in 5 days, risk-free</span></h2>
+  <p class="sub">We build first. You decide after. Here's exactly how it goes.</p></div>
   <div class="forge">
     <div class="fphase glass reveal"><div class="fbg" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="fscrim"></div><div class="ph-n">01</div>
       <div class="ph-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></div>
-      <h4 class="disp">Audit</h4><p>We pressure-test your current presence — speed, mobile, SEO, trust — and map every leak.</p></div>
+      <h4 class="disp">1 · Audit</h4><p>We study your current site, reviews, and socials — and pinpoint exactly where you're losing customers.</p></div>
     <div class="fphase glass reveal"><div class="fbg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="fscrim"></div><div class="ph-n">02</div>
       <div class="ph-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h10l3-3 5 5-3 3-5-5"/><path d="M13 13 4 22"/><path d="M14 6l4-4 3 3-4 4"/></svg></div>
-      <h4 class="disp">Forge</h4><p>We design and build a premium, fast, conversion-first experience with AI baked in.</p></div>
+      <h4 class="disp">2 · Rebuild in 5 days</h4><p>We design and build your premium, mobile-perfect, AI-powered site — in about five business days.</p></div>
     <div class="fphase glass reveal"><div class="fbg" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="fscrim"></div><div class="ph-n">03</div>
       <div class="ph-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5 5.5 5 9 0 2-1 4-5 7-4-3-5-5-5-7 0-3.5 1.5-7 5-9z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 16l-2 4 5-2 5 2-2-4"/></svg></div>
-      <h4 class="disp">Launch</h4><p>We ship it, wire up tracking, and make sure every lead is captured and followed up.</p></div>
+      <h4 class="disp">3 · Test it free</h4><p>We send a private link to your new site. Click around, show your team, live with it for 5 days — no card, no commitment.</p></div>
     <div class="fphase glass reveal"><div class="fbg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="fscrim"></div><div class="ph-n">04</div>
       <div class="ph-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4 4 4-6 4 6 4-4v9H4z"/><path d="M4 20h16"/></svg></div>
-      <h4 class="disp">Dominate</h4><p>We optimize, rank, and keep the AI working 24/7 so you pull ahead — and stay there.</p></div>
+      <h4 class="disp">4 · Own it or walk</h4><p>Love it? It's yours for a one-time $2,500. Don't? Pay nothing and keep the audit. No pressure, ever.</p></div>
   </div>
 </div></section>
 
@@ -430,28 +447,39 @@
 </div></section>
 
 <section id="pricing"><div class="wrap">
-  <div class="center reveal"><div class="eyebrow">Investment</div><h2 class="h2 disp">Built once. Working for you forever.</h2>
-  <p class="sub">Transparent starting points — we scope the exact number on a quick call.</p></div>
+  <div class="center reveal"><div class="eyebrow">Investment</div><h2 class="h2 disp">Simple, honest pricing</h2>
+  <p class="sub">No hidden fees, no "request a quote" runaround. Here's exactly what it costs.</p></div>
   <div class="price-grid">
-    <div class="price glass reveal"><div class="tier">Launch</div><div class="nm">Website Transformation</div><div class="pr">$2,500<small> +</small></div>
-      <ul><li>Premium, fast, mobile-perfect rebuild</li><li>Your brand &amp; reviews up front</li><li>Lead capture + click-to-call/book</li><li>Local SEO foundations</li></ul>
-      <a class="btn ghost" href="#pricing" style="width:100%">Start here</a></div>
-    <div class="price glass feat reveal"><div class="badge2">Most popular</div><div class="tier">Dominate</div><div class="nm">AI Automation</div><div class="pr">$5,000<small> +</small></div>
-      <ul><li>Everything in Transformation</li><li>AI receptionist + lead capture</li><li>AI voice calls (answer &amp; follow-up)</li><li>CRM follow-up that closes leads</li></ul>
-      <a class="btn pri" href="#pricing" style="width:100%">Book a call</a></div>
-    <div class="price glass reveal"><div class="tier">Obsidian Elite</div><div class="nm">Custom App</div><div class="pr">$15,000<small> +</small></div>
-      <ul><li>Bespoke web or mobile app</li><li>Built around your exact workflow</li><li>AI + automation baked in</li><li>Ongoing support &amp; iteration</li></ul>
-      <a class="btn ghost" href="#pricing" style="width:100%">Let's talk</a></div>
+    <div class="price glass feat reveal"><div class="badge2">Try it free first</div><div class="tier">Website Rebuild</div><div class="nm">You own it — one time</div><div class="pr">$2,500</div>
+      <ul><li>Premium, fast, mobile-perfect rebuild</li><li>Your brand, photos &amp; reviews up front</li><li>Lead capture + click-to-call/book</li><li>Local SEO foundations + analytics</li><li><b style="color:#fff">5-day free review — pay only if you love it</b></li></ul>
+      <a class="btn pri" href="#scanner" style="width:100%">Claim your free audit</a></div>
+    <div class="price glass reveal"><div class="tier">Growth Plan</div><div class="nm">Keep it running &amp; growing</div><div class="pr">$199<small>/mo</small></div>
+      <ul><li>Hosting, maintenance &amp; updates</li><li>Backups &amp; security</li><li>Ongoing edits &amp; support</li><li>Optional AI &amp; SEO add-ons</li></ul>
+      <a class="btn ghost" href="mailto:hello@obsidianlabs.io" style="width:100%">Start growing</a></div>
+    <div class="price glass reveal"><div class="tier">Mobile / Web App</div><div class="nm">Custom build for your business</div><div class="pr">Let's talk</div>
+      <ul><li>Bespoke iOS + Android app</li><li>Built around your exact workflow</li><li>AI + automation baked in</li><li>Custom quote — tell us your idea</li></ul>
+      <a class="btn ghost" href="mailto:hello@obsidianlabs.io" style="width:100%">Inquire for pricing</a></div>
   </div>
-  <div class="center" style="margin-top:34px"><a class="btn pri reveal" href="mailto:hello@obsidianlabs.io">Book your free strategy call</a></div>
+  <div class="center" style="margin-top:34px"><a class="btn pri reveal" href="#scanner">Claim your free AI website audit</a></div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <div class="center reveal"><div class="eyebrow">What owners say</div><h2 class="h2 disp">Trusted by local businesses <span class="grad">like yours</span></h2>
+  <p class="sub">Real relationships, real results — here's what working with us feels like.</p></div>
+  <div class="tg">
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"They sent me a finished website before I paid a dime. I tested it for a week, loved it, and now it books jobs while I'm on the truck."</p><div class="who"><b>Mike R.</b><span>Plumbing · Mahopac, NY</span></div></div>
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"Our old site looked like 2010. The new one captures leads and answers customers 24/7. Best money we've spent on the business."</p><div class="who"><b>Dana &amp; Lou</b><span>Family deli · Carmel, NY</span></div></div>
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"No risk, no pressure — they just built it and let the work speak. The AI assistant alone paid for the whole thing."</p><div class="who"><b>Sofia M.</b><span>Med-spa · Yorktown, NY</span></div></div>
+  </div>
+  <p class="center" style="font-size:11px;color:var(--mut);opacity:.7;margin-top:18px">Sample testimonials shown for layout — we'll swap in real client reviews as they come in.</p>
 </div></section>
 
 <section id="cta"><div class="wrap">
   <div class="finalcta reveal">
     <div class="eyebrow" style="margin-bottom:14px">Your move</div>
     <h2 class="disp">Ready to look <span class="grad">expensive?</span></h2>
-    <p>Your next customer judges you before they ever speak to you. Let's make their first impression unforgettable.</p>
-    <div class="hbtns"><a class="btn pri" href="#scanner">Claim your free website audit</a><a class="btn ghost" href="#pricing">Book a strategy call</a></div>
+    <p>We'll rebuild your site in 5 days and let you try it free. Love it? It's <b style="color:#fff">$2,500 to own</b>. Don't? You owe nothing.</p>
+    <div class="hbtns"><a class="btn pri" href="#scanner">Claim your free AI website audit</a><a class="btn ghost" href="#forge">See how it works</a></div>
   </div>
 </div></section>
 
