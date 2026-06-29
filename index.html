@@ -208,7 +208,7 @@
   .star{position:absolute;border-radius:50%;background:#fff;opacity:.05;animation:twinkle var(--d,4s) ease-in-out infinite;animation-delay:var(--dl,0s);box-shadow:0 0 6px rgba(255,255,255,.45)}
   @keyframes twinkle{0%,100%{opacity:.05;transform:scale(.7)}50%{opacity:var(--o,.85);transform:scale(1.18)}}
   @keyframes starDrift{from{transform:translate(0,0)}to{transform:translate(-34px,-22px)}}
-  @media(prefers-reduced-motion:reduce){.star{animation:none;opacity:.4}.starfield{animation:none}.crest{animation:none!important;transform:rotateX(6deg)}.shootingstar{display:none}}
+  @media(prefers-reduced-motion:reduce){.star{animation:none;opacity:.4}.starfield{animation:none}}
   /* shooting stars (blend with starfield) */
   .shootingstar{position:fixed;z-index:-2;height:2px;width:130px;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(232,238,255,.95));border-radius:3px;opacity:0;filter:drop-shadow(0 0 7px rgba(200,212,255,.8))}
   @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(20deg) scaleX(.25)}10%{opacity:.95}100%{opacity:0;transform:translate(470px,172px) rotate(20deg) scaleX(1)}}
@@ -544,7 +544,6 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
     h+='<div class="star" style="width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;--d:'+(2.4+Math.random()*4).toFixed(2)+'s;--dl:'+(Math.random()*5).toFixed(2)+'s;--o:'+(0.45+Math.random()*0.5).toFixed(2)+'"></div>';}
   f.innerHTML=h;})();
 (function(){
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   function shoot(){
     var s=document.createElement('div'); s.className='shootingstar';
     s.style.left=(Math.random()*62+4)+'%'; s.style.top=(Math.random()*42+2)+'%';
