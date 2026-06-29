@@ -200,6 +200,11 @@
   .stat{padding:28px 16px;text-align:center}
   .stat .sn{font-family:var(--disp);font-weight:700;font-size:clamp(30px,4.2vw,46px);background:linear-gradient(135deg,#fff,#aeb4c2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .stat .sl{font-size:12.5px;color:var(--mut);margin-top:6px;letter-spacing:.5px}
+  .stat{position:relative;overflow:hidden}
+  .stat .statbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(.46) saturate(1.08);transition:transform .6s ease,filter .4s}
+  .stat .statsc{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,11,18,.9),rgba(8,11,18,.55))}
+  .stat>*{position:relative;z-index:2}
+  .stat:hover .statbg{transform:scale(1.07);filter:brightness(.6) saturate(1.12)}
   .pilimg{height:150px;border-radius:14px;background-size:cover;background-position:center;margin-bottom:18px;filter:grayscale(.18) contrast(1.05);box-shadow:inset 0 -46px 54px rgba(8,8,11,.66),inset 0 0 0 1px rgba(255,255,255,.06)}
   .pil,.price,.ind,.fphase,.tm,.aic{transition:box-shadow .3s ease,border-color .3s ease,transform .2s ease}
   .pil:hover,.price:hover,.ind:hover,.fphase:hover,.tm:hover,.aic:hover{border-color:rgba(255,255,255,.26);box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 42px rgba(220,225,235,.12)}
@@ -319,10 +324,10 @@
 
 <section id="stats" style="padding:40px 0 10px"><div class="wrap">
   <div class="stats reveal">
-    <div class="stat glass"><div class="sn" data-count="12" data-suffix="">0</div><div class="sl">Demo builds created</div></div>
-    <div class="stat glass"><div class="sn" data-count="3.2" data-dec="1" data-suffix="d">0</div><div class="sl">Avg rebuild time</div></div>
-    <div class="stat glass"><div class="sn">5-day</div><div class="sl">Free review window</div></div>
-    <div class="stat glass"><div class="sn">$0</div><div class="sl">Risk to you upfront</div></div>
+    <div class="stat glass"><div class="statbg" style="background-image:url('https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="statsc"></div><div class="sn" data-count="12" data-suffix="">0</div><div class="sl">Demo builds created</div></div>
+    <div class="stat glass"><div class="statbg" style="background-image:url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="statsc"></div><div class="sn" data-count="3.2" data-dec="1" data-suffix="d">0</div><div class="sl">Avg rebuild time</div></div>
+    <div class="stat glass"><div class="statbg" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="statsc"></div><div class="sn">5-day</div><div class="sl">Free review window</div></div>
+    <div class="stat glass"><div class="statbg" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="statsc"></div><div class="sn">$0</div><div class="sl">Risk to you upfront</div></div>
   </div>
   <p class="center" style="font-size:11px;color:var(--mut);opacity:.7;margin-top:16px">Early-stage &amp; NY-based — these reflect our current demo pipeline, not inflated claims.</p>
 </div></section>
