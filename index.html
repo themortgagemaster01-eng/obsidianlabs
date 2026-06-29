@@ -208,7 +208,23 @@
   .star{position:absolute;border-radius:50%;background:#fff;opacity:.05;animation:twinkle var(--d,4s) ease-in-out infinite;animation-delay:var(--dl,0s);box-shadow:0 0 6px rgba(255,255,255,.45)}
   @keyframes twinkle{0%,100%{opacity:.05;transform:scale(.7)}50%{opacity:var(--o,.85);transform:scale(1.18)}}
   @keyframes starDrift{from{transform:translate(0,0)}to{transform:translate(-34px,-22px)}}
-  @media(prefers-reduced-motion:reduce){.star{animation:none;opacity:.4}.starfield{animation:none}}
+  @media(prefers-reduced-motion:reduce){.star{animation:none;opacity:.4}.starfield{animation:none}.crest{animation:none!important;transform:rotateX(6deg)}.shootingstar{display:none}}
+  /* shooting stars (blend with starfield) */
+  .shootingstar{position:fixed;z-index:-2;height:2px;width:130px;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(232,238,255,.95));border-radius:3px;opacity:0;filter:drop-shadow(0 0 7px rgba(200,212,255,.8))}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(20deg) scaleX(.25)}10%{opacity:.95}100%{opacity:0;transform:translate(470px,172px) rotate(20deg) scaleX(1)}}
+  /* AI cards: stock image behind the icon */
+  .aic{position:relative;overflow:hidden}
+  .aic .aicbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(.4) saturate(1.05);transition:transform .6s ease,filter .4s}
+  .aic .aicsc{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,11,18,.95),rgba(8,11,18,.6))}
+  .aic>*{position:relative;z-index:2}
+  .aic:hover .aicbg{transform:scale(1.08);filter:brightness(.52) saturate(1.1)}
+  /* holographic 3D crest spin */
+  .heromark{perspective:780px}
+  .crest{transform-style:preserve-3d;animation:crestSpin 16s linear infinite,crestHolo 7s ease-in-out infinite;will-change:transform,filter}
+  @keyframes crestSpin{from{transform:rotateX(8deg) rotateY(0deg)}to{transform:rotateX(8deg) rotateY(360deg)}}
+  @keyframes crestHolo{0%,100%{filter:drop-shadow(0 10px 26px rgba(174,180,194,.42)) hue-rotate(0deg) saturate(1.05)}33%{filter:drop-shadow(0 12px 32px rgba(199,154,63,.5)) hue-rotate(40deg) saturate(1.6)}66%{filter:drop-shadow(0 12px 32px rgba(120,170,255,.45)) hue-rotate(-32deg) saturate(1.5)}}
+  /* Ava avatar photo in hero dashboard */
+  .dashwide .av img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block}
   .marble{position:fixed;inset:0;z-index:-3;background:url('marble.jpg') center/cover no-repeat}
   .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.5),rgba(8,8,11,.62))}
 </style>
@@ -253,7 +269,7 @@
         <div class="kpi"><div class="l">Leads / mo</div><div class="n" data-count="42" data-suffix="%" data-prefix="+">+0%</div><div class="bar"><i data-w="82"></i></div></div>
         <div class="kpi"><div class="l">Calls</div><div class="n" data-count="31" data-suffix="%" data-prefix="+">+0%</div><div class="bar"><i data-w="68"></i></div></div>
         <div class="kpi"><div class="l">Load time</div><div class="n" data-count="0.9" data-suffix="s" data-dec="1">0s</div><div class="bar"><i data-w="94"></i></div></div>
-        <div class="dashwide"><div class="av">A</div><div class="t"><b>Ava captured 7 leads</b> overnight — all booked into the calendar before the doors opened.</div></div>
+        <div class="dashwide"><div class="av"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&amp;fit=crop&amp;w=96&amp;q=75&amp;crop=faces" alt="Ava"></div><div class="t"><b>Ava captured 7 leads</b> overnight — all booked into the calendar before the doors opened.</div></div>
       </div>
     </div>
     <div class="herophone"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&amp;fit=crop&amp;w=320&amp;q=72" alt="A mobile app we built"></div>
@@ -306,10 +322,10 @@
       <ul><li>AI receptionist &amp; lead capture</li><li>Automated text/email follow-up</li><li>Local SEO &amp; review engines</li></ul></div>
   </div>
   <div class="ai-row">
-    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg></div><h4 class="disp">AI Receptionist</h4><p>Answers 24/7</p></div>
-    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c-1 0-2 1-2 2 0 8 6 14 14 14 1 0 2-1 2-2v-3l-4-2-2 2a11 11 0 0 1-5-5l2-2-2-4z"/></svg></div><h4 class="disp">AI Voice Calls</h4><p>Natural phone agent</p></div>
-    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13-3l3 3M20 15a8 8 0 0 1-13 3l-3-3"/><path d="M20 4v5h-5M4 20v-5h5"/></svg></div><h4 class="disp">AI CRM Follow-up</h4><p>Closes the loop</p></div>
-    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div><h4 class="disp">Custom Apps</h4><p>Built for you</p></div>
+    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></svg></div><h4 class="disp">AI Receptionist</h4><p>Answers 24/7</p><div class="aicbg" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="aicsc"></div></div>
+    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3c-1 0-2 1-2 2 0 8 6 14 14 14 1 0 2-1 2-2v-3l-4-2-2 2a11 11 0 0 1-5-5l2-2-2-4z"/></svg></div><h4 class="disp">AI Voice Calls</h4><p>Natural phone agent</p><div class="aicbg" style="background-image:url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="aicsc"></div></div>
+    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13-3l3 3M20 15a8 8 0 0 1-13 3l-3-3"/><path d="M20 4v5h-5M4 20v-5h5"/></svg></div><h4 class="disp">AI CRM Follow-up</h4><p>Closes the loop</p><div class="aicbg" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="aicsc"></div></div>
+    <div class="aic glass reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div><h4 class="disp">Custom Apps</h4><p>Built for you</p><div class="aicbg" style="background-image:url('https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&amp;fit=crop&amp;w=500&amp;q=70')"></div><div class="aicsc"></div></div>
   </div>
 </div></section>
 
@@ -527,6 +543,19 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
   for(var i=0;i<N;i++){var sz=(Math.random()*2+0.6).toFixed(2);
     h+='<div class="star" style="width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;--d:'+(2.4+Math.random()*4).toFixed(2)+'s;--dl:'+(Math.random()*5).toFixed(2)+'s;--o:'+(0.45+Math.random()*0.5).toFixed(2)+'"></div>';}
   f.innerHTML=h;})();
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  function shoot(){
+    var s=document.createElement('div'); s.className='shootingstar';
+    s.style.left=(Math.random()*62+4)+'%'; s.style.top=(Math.random()*42+2)+'%';
+    var dur=(1.0+Math.random()*0.8).toFixed(2);
+    s.style.animation='shoot '+dur+'s ease-out forwards';
+    document.body.appendChild(s);
+    setTimeout(function(){ if(s&&s.parentNode) s.parentNode.removeChild(s); }, dur*1000+120);
+  }
+  function loop(){ shoot(); setTimeout(loop, 3200+Math.random()*5200); }
+  setTimeout(loop, 1800);
+})();
 </script>
 </body>
 </html>
