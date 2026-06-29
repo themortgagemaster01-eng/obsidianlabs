@@ -214,10 +214,10 @@
   @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(20deg) scaleX(.25)}10%{opacity:.95}100%{opacity:0;transform:translate(470px,172px) rotate(20deg) scaleX(1)}}
   /* AI cards: stock image behind the icon */
   .aic{position:relative;overflow:hidden}
-  .aic .aicbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(.4) saturate(1.05);transition:transform .6s ease,filter .4s}
-  .aic .aicsc{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,11,18,.95),rgba(8,11,18,.6))}
+  .aic .aicbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(.66) saturate(1.1);transition:transform .6s ease,filter .4s}
+  .aic .aicsc{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,11,18,.8) 8%,rgba(8,11,18,.42) 60%,rgba(8,11,18,.22))}
   .aic>*{position:relative;z-index:2}
-  .aic:hover .aicbg{transform:scale(1.08);filter:brightness(.52) saturate(1.1)}
+  .aic:hover .aicbg{transform:scale(1.08);filter:brightness(.82) saturate(1.15)}
   /* holographic 3D crest spin */
   .heromark{perspective:780px}
   .crest{transform-style:preserve-3d;animation:crestSpin 16s linear infinite,crestHolo 7s ease-in-out infinite;will-change:transform,filter}
