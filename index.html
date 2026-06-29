@@ -521,6 +521,12 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
   if(e.target.querySelectorAll){e.target.querySelectorAll('[data-count]').forEach(animateCount);e.target.querySelectorAll('.bar i').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});}
   io.unobserve(e.target);}})},{threshold:.16});
 [].forEach.call(document.querySelectorAll('.reveal'),function(el,i){el.style.transitionDelay=((i%6)*0.05)+'s';io.observe(el);});
+/* SAFETY NET: never leave content stuck-hidden if IntersectionObserver doesn't fire (background tab, etc.) */
+function revealEl(el){el.classList.add('in');if(el.querySelectorAll){el.querySelectorAll('[data-count]').forEach(animateCount);el.querySelectorAll('.bar i').forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});}}
+function kickReveal(){var vh=window.innerHeight||800;document.querySelectorAll('.reveal:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<vh*1.15&&r.bottom>-50)revealEl(el);});}
+window.addEventListener('load',kickReveal);kickReveal();
+window.addEventListener('scroll',kickReveal,{passive:true});
+setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(revealEl);},2600);
 
 var QA=[
  {q:"What do you build?",a:"Three things: premium websites, mobile apps, and AI lead-generation systems. Most clients start with a website transformation and add AI automation. Want me to set up a quick call?"},
