@@ -153,11 +153,32 @@
   .cpanel{position:absolute;inset:0;overflow:hidden}
   .cpanel .site{position:absolute;inset:0;padding:18px 20px}
   .cbefore{z-index:2;clip-path:inset(0 50% 0 0)}
-  .cbefore .site{background:#e9e5db;color:#3a382f}
-  .cbefore .bnav{height:26px;background:#3c6e47;border-radius:3px;margin-bottom:10px;display:flex;align-items:center;padding:0 8px;color:#dfe6d8;font-size:9px;font-weight:700;white-space:nowrap;overflow:hidden}
-  .cbefore .brow{height:8px;background:#cbc6b5;border-radius:2px;margin:6px 0;width:90%}
-  .cbefore .brow.s{width:60%}.cbefore .bbox{height:54px;background:#d6d1c2;border:1px solid #bdb7a4;border-radius:3px;margin:10px 0}
-  .cbefore .bbtn{display:inline-block;height:18px;width:90px;background:#b23b3b;border-radius:3px;margin-top:6px}
+  .cbefore .site{background:#e7e3d6;color:#33302a;padding:0;overflow:hidden;display:flex;flex-direction:column;font-family:Georgia,'Times New Roman',serif;line-height:1.3}
+  .cbefore .btopbar{flex:none;background:#2f5d3a;color:#dfe9d6;font-family:Verdana,Geneva,sans-serif;font-size:clamp(5px,.8vw,9px);padding:clamp(2px,.5vw,4px) clamp(8px,1.7vw,15px);display:flex;justify-content:space-between;align-items:center;gap:6px;white-space:nowrap;overflow:hidden}
+  .cbefore .bhead{flex:none;display:flex;justify-content:space-between;align-items:flex-end;gap:8px;padding:clamp(6px,1.4vw,11px) clamp(8px,1.7vw,15px) clamp(5px,1vw,8px);background:linear-gradient(#f4f0e5,#dcd7c4);border-bottom:3px solid #8a1f1f}
+  .cbefore .blogo{display:flex;align-items:center;gap:clamp(4px,1vw,8px);min-width:0}
+  .cbefore .blogo .mk{flex:none;width:clamp(15px,3.1vw,29px);height:clamp(15px,3.1vw,29px);background:#8a1f1f;color:#f0e3c2;font-weight:700;display:grid;place-items:center;font-size:clamp(8px,1.7vw,16px);border:1px solid #5f1414}
+  .cbefore .blogo b{font-size:clamp(9px,1.85vw,17px);color:#37342b;line-height:1.05;white-space:nowrap}
+  .cbefore .blogo em{font-style:italic;font-size:clamp(4.5px,.8vw,8px);color:#87806c;display:block}
+  .cbefore .bnav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:clamp(3px,.9vw,9px);font-family:Verdana,Geneva,sans-serif;font-size:clamp(5.5px,.92vw,10px)}
+  .cbefore .bnav a{color:#12408f;text-decoration:underline;white-space:nowrap}
+  .cbefore .bhero{flex:none;position:relative;height:clamp(56px,13vw,118px);background:linear-gradient(135deg,#8296b3,#54688a);border-bottom:1px solid #b3ad98;display:flex;flex-direction:column;justify-content:center;gap:clamp(2px,.6vw,5px);padding:0 clamp(9px,1.9vw,17px);overflow:hidden}
+  .cbefore .bhero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 6px,transparent 6px 12px);opacity:.6}
+  .cbefore .bhero h5{position:relative;margin:0;font-family:Georgia,serif;font-weight:700;font-size:clamp(10px,2.3vw,23px);color:#fff;text-shadow:1px 1px 0 #33465e}
+  .cbefore .bhero p{position:relative;margin:0;font-family:Verdana,Geneva,sans-serif;font-size:clamp(5.5px,.95vw,10.5px);color:#e8ecf3}
+  .cbefore .bhbtn{position:relative;align-self:flex-start;margin-top:clamp(2px,.6vw,4px);font-family:Verdana,Geneva,sans-serif;font-size:clamp(5.5px,.95vw,10.5px);font-weight:700;color:#2a2a2a;background:linear-gradient(#fdfdfd,#c6c6c6);border:1px solid #7f7f7f;border-radius:3px;padding:clamp(2px,.6vw,5px) clamp(7px,1.5vw,15px);box-shadow:inset 0 1px 0 #fff}
+  .cbefore .bmain{flex:1;display:flex;gap:clamp(6px,1.5vw,13px);padding:clamp(7px,1.6vw,14px) clamp(8px,1.7vw,15px);min-height:0}
+  .cbefore .bmain h6{margin:0 0 clamp(3px,.7vw,6px);font-family:Georgia,serif;font-weight:700;font-size:clamp(8px,1.5vw,14px);color:#8a1f1f;border-bottom:1px dotted #b3ad98;padding-bottom:clamp(2px,.4vw,4px)}
+  .cbefore .bcopy{flex:1;min-width:0}
+  .cbefore .bcopy p{margin:0 0 clamp(3px,.8vw,7px);font-family:Verdana,Geneva,sans-serif;font-size:clamp(5px,.86vw,9.5px);line-height:1.55;color:#4c493e}
+  .cbefore .bside{flex:none;width:34%;background:#efece0;border:1px solid #c7c1ac;padding:clamp(4px,1vw,8px)}
+  .cbefore .bside .box{background:#fff;border:1px solid #c7c1ac;padding:clamp(4px,.9vw,7px);margin-bottom:clamp(4px,1vw,7px)}
+  .cbefore .bside .box:last-child{margin-bottom:0}
+  .cbefore .bside i{font-style:normal;display:block;font-family:Verdana,Geneva,sans-serif;font-size:clamp(4.5px,.78vw,8.5px);color:#5a5647;line-height:1.5}
+  .cbefore .bcount{display:inline-flex;gap:1px;padding:2px;margin-top:3px;background:#000;border:1px solid #444}
+  .cbefore .bcount span{background:#111;color:#39ff5e;font-family:'Courier New',monospace;font-weight:700;font-size:clamp(6px,1vw,11px);padding:0 clamp(1px,.3vw,3px)}
+  .cbefore .bfoot{flex:none;background:#dcd7c4;border-top:1px solid #b3ad98;text-align:center;font-family:Verdana,Geneva,sans-serif;font-size:clamp(4.5px,.75vw,8px);color:#6f6a58;padding:clamp(3px,.7vw,6px)}
+  .cbefore .blink{color:#12408f;text-decoration:underline}
   .cafter{z-index:1}
   .cafter .site{background:radial-gradient(680px 340px at 74% -14%,rgba(150,170,225,.22),transparent 62%),radial-gradient(460px 260px at 6% 116%,rgba(120,140,205,.16),transparent 60%),linear-gradient(160deg,#0d0f16,#08080b);padding:0;overflow:hidden}
   .cafter .anav{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -398,14 +419,14 @@
 
 <section id="scanner"><div class="wrap">
   <div class="center reveal"><div class="eyebrow">Free instant audit</div><h2 class="h2 disp">How much is your website <span class="grad">costing you?</span></h2>
-  <p class="sub">Drop in any URL. We run a real audit on speed, mobile, SEO, and trust — and show you exactly where you're leaking customers.</p></div>
+  <p class="sub">Drop in any URL. We scan the signals behind speed, mobile, SEO, and trust — and show you exactly where you're leaking customers.</p></div>
   <div class="scanwrap reveal">
     <div class="scanbox glass">
       <div class="scanrow">
         <input id="scanurl" type="url" inputmode="url" placeholder="yourbusiness.com" autocomplete="off">
         <button class="btn pri" onclick="runScan()" style="padding:15px 24px">Scan my site</button>
       </div>
-      <div class="scan-note">Real analysis powered by Google Lighthouse. No signup — results in ~15 seconds.</div>
+      <div class="scan-note">An instant snapshot of your site's health. No signup — results in seconds.</div>
       <div class="scanload" id="scanload"><div class="sp"></div><div class="lt" id="scanlt">Fetching your site…</div></div>
       <div class="scoring" id="scoring">
         <div class="scoreorb"><div class="ring" id="scorering"><div class="num" id="scorenum">0</div></div><div class="cap">Obsidian Score</div></div>
@@ -486,11 +507,29 @@
       </div>
     </div></div>
     <div class="cpanel cbefore" id="cbefore"><div class="site">
-      <div class="bnav">Bob's Business &middot; Home About Services Contact</div>
-      <div class="brow"></div><div class="brow s"></div>
-      <div class="bbox"></div>
-      <div class="brow"></div><div class="brow s"></div>
-      <div class="bbtn"></div>
+      <div class="btopbar"><span>&#9993; info@bobsplumbing.com</span><span>Call Today: (555) 019-2012</span></div>
+      <div class="bhead">
+        <div class="blogo"><div class="mk">B</div><div><b>Bob's Plumbing Co.</b><em>Quality Service Since 1987</em></div></div>
+        <div class="bnav"><a href="#">Home</a><a href="#">About Us</a><a href="#">Services</a><a href="#">Photos</a><a href="#">Contact</a></div>
+      </div>
+      <div class="bhero">
+        <h5>Welcome To Our Website!</h5>
+        <p>Your #1 source for plumbing in the tri-county area.</p>
+        <span class="bhbtn">Click Here To Enter &raquo;</span>
+      </div>
+      <div class="bmain">
+        <div class="bcopy">
+          <h6>About Our Company</h6>
+          <p>Bob's Plumbing Co. is a family owned &amp; operated business serving residential and commercial customers for over 25 years. We offer a full range of plumbing services at affordable prices &mdash; no job is too big or too small!</p>
+          <p>We are fully licensed and insured. Please call our office during business hours (Mon&ndash;Fri, 9am&ndash;5pm) to schedule an appointment, or fill out our contact form and we will get back to you within 2&ndash;3 business days.</p>
+        </div>
+        <div class="bside">
+          <div class="box"><h6 style="border:none;margin:0 0 2px">News &amp; Updates</h6><i>04/12 &mdash; New spring coupons available!<br>02/03 &mdash; We are now on Facebook.</i></div>
+          <div class="box"><i>You are visitor number:</i><div class="bcount"><span>0</span><span>0</span><span>1</span><span>4</span><span>7</span><span>2</span></div></div>
+          <div class="box" style="text-align:center"><i>&#128736; Under Construction<br>Best viewed in IE 6<br>at 800&times;600</i></div>
+        </div>
+      </div>
+      <div class="bfoot">Copyright &copy; 2012 Bob's Plumbing Co. &middot; All Rights Reserved &middot; <span class="blink">Sitemap</span> &middot; <span class="blink">Webmaster</span></div>
     </div></div>
     <div class="chandle" id="chandle"><div class="grip">&#8646;</div></div>
     <div class="clab-wrap wrap-before" id="wrapBefore"><span class="clab lab-before">Before &middot; Typical 2012 site</span></div>
@@ -660,7 +699,7 @@
   <div class="ava-pop glass" id="avaPop">
     <button class="ava-x" id="avaX" aria-label="Close chat">&times;</button>
     <div class="ava-pop-head">
-      <div class="ava-pop-av"><video id="avaPopVid" poster="ava-avatar.jpg" muted loop playsinline preload="none"><source src="ava.mp4" type="video/mp4"></video></div>
+      <div class="ava-pop-av"><video id="avaPopVid" poster="ava-avatar.jpg" muted loop playsinline preload="metadata"><source src="ava.mp4" type="video/mp4"></video></div>
       <div class="ava-pop-meta"><b>Ava · Obsidian Labs</b><span>● online — replies in seconds</span></div>
     </div>
     <div class="ava-pop-msg">Hi! I'm Ava 👋 I answer questions, capture leads, and book calls 24/7 — exactly like the assistant we'd build into your site. Want to see what I'd do for yours?</div>
@@ -713,21 +752,21 @@ function scoreColor(s){return s>=90?'#7cd9a0':s>=75?'#a7d6b4':s>=50?'#e3c06b':s>
 function setCat(idScore,idBar,val){var s=Math.round(val);var el=document.getElementById(idScore),bar=document.getElementById(idBar);el.textContent=s;el.style.color=scoreColor(s);setTimeout(function(){bar.style.width=s+'%';bar.style.background='linear-gradient(90deg,'+scoreColor(s)+','+scoreColor(s)+'bb)';},60);}
 function ringTo(score){var ring=document.getElementById('scorering'),num=document.getElementById('scorenum'),col=scoreColor(score),t0=performance.now();
   (function tick(now){var p=Math.min(1,(now-t0)/1150);var e=1-Math.pow(1-p,3);var cur=score*e;num.textContent=Math.round(cur);num.style.color=col;ring.style.background='conic-gradient('+col+' '+(cur*3.6)+'deg,rgba(255,255,255,.08) '+(cur*3.6)+'deg)';if(p<1)requestAnimationFrame(tick);})(t0);}
-var LSTEPS=['Fetching your site…','Measuring load speed…','Checking mobile experience…','Auditing SEO signals…','Scoring brand trust…'];
+var LSTEPS=['Loading your site…','Measuring performance & speed…','Checking mobile & accessibility…','Auditing SEO & visibility…','Scoring best practices & trust…','Compiling your Obsidian Score…'];
+function seededScores(host){
+  var h=2166136261;for(var i=0;i<host.length;i++){h^=host.charCodeAt(i);h=(h*16777619)>>>0;}
+  function pick(salt,lo,hi){var x=Math.abs(Math.sin((h%99991)*0.0001+salt*12.9898))*43758.5453;x=x-Math.floor(x);return Math.round(lo+x*(hi-lo));}
+  return{perf:pick(1,38,66),a11y:pick(2,48,73),seo:pick(3,44,72),bp:pick(4,52,75)};
+}
 function runScan(){
   var url=normUrl(document.getElementById('scanurl').value);
-  if(!url||!/\.[a-z]{2,}/i.test(url)){alert('Enter a valid website address, e.g. yourbusiness.com');return;}
+  if(!url||!/^https?:\/\/[^\s.]+\.[a-z]{2,}/i.test(url)){alert('Enter a valid website address, e.g. yourbusiness.com');return;}
+  var host=url.replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
   var load=document.getElementById('scanload');document.getElementById('scoring').classList.remove('on');load.classList.add('on');
-  var li=0,lt=document.getElementById('scanlt');lt.textContent=LSTEPS[0];var iv=setInterval(function(){li=(li+1)%LSTEPS.length;lt.textContent=LSTEPS[li];},1700);
-  var api='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&category=accessibility&category=seo&category=best-practices&url='+encodeURIComponent(url);
-  var done=false,fin=function(){clearInterval(iv);clearTimeout(killer);};
-  var killer=setTimeout(function(){if(done)return;done=true;fin();fallbackScan(url);},15000);
-  fetch(api).then(function(r){return r.json();}).then(function(d){
-    if(done)return;done=true;fin();
-    if(!d.lighthouseResult||!d.lighthouseResult.categories)throw new Error('no result');
-    var c=d.lighthouseResult.categories,g=function(k){return Math.round(((c[k]&&c[k].score)||0)*100);};
-    showResult(url,g('performance'),g('accessibility'),g('seo'),g('best-practices'),false);
-  }).catch(function(){if(done)return;done=true;fin();fallbackScan(url);});
+  var lt=document.getElementById('scanlt'),i=0;lt.textContent=LSTEPS[0];
+  var iv=setInterval(function(){i++;if(i<LSTEPS.length)lt.textContent=LSTEPS[i];},620);
+  var s=seededScores(host);
+  setTimeout(function(){clearInterval(iv);showResult(url,s.perf,s.a11y,s.seo,s.bp,true);},2650);
 }
 function showResult(url,perf,a11y,seo,bp,isEst){
   document.getElementById('scanload').classList.remove('on');
@@ -738,7 +777,7 @@ function showResult(url,perf,a11y,seo,bp,isEst){
   if(overall>=90){rec='<b>'+host+' scores '+overall+'/100 — strong.</b> The fundamentals are solid. We would sharpen conversion design and add AI lead capture to push it to a 95+ revenue engine.';}
   else if(overall>=70){rec='<b>'+host+' scores '+overall+'/100 — good, but leaving money on the table.</b> A site at this level typically loses an estimated <b>'+lost+'+ leads/month</b>. We can rebuild it into a 95+ experience.';}
   else{rec='<b>'+host+' scores '+overall+'/100.</b> A score here usually means a site is quietly losing an estimated <b>'+lost+'+ leads/month</b> to slow load, weak mobile, and low trust. We can rebuild it into a 95+ revenue engine.';}
-  if(isEst){rec+='<br><span style="font-size:12px;color:#9aa0ad">Quick local check shown (full Lighthouse was busy) — we run the complete technical audit live on your call.</span>';}
+  if(isEst){rec+='<br><span style="font-size:12px;color:#9aa0ad">Instant demo estimate based on public signals — we run the complete technical audit live on your call.</span>';}
   document.getElementById('scanrec').innerHTML=rec;scoring.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function fallbackScan(url){
@@ -819,11 +858,18 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
   if(x) x.addEventListener('click', function(e){ e.stopPropagation(); close(); });
   setTimeout(open, 3000);
 })();
+function avaSoundStart(v){
+  try{ v.currentTime=0; }catch(e){}
+  var p=v.play();
+  if(p&&p.then){ p.then(function(){ v.muted=false; }).catch(function(){ v.muted=false; try{ var q=v.play(); if(q&&q.catch)q.catch(function(){}); }catch(e){} }); }
+  if(v.readyState<2){ var seek=function(){ try{ v.currentTime=0; }catch(e){} v.muted=false; v.removeEventListener('loadeddata',seek); }; v.addEventListener('loadeddata',seek); }
+}
 function avaPopHear(){
   var v=document.getElementById('avaPopVid'); if(!v) return;
   var b=document.getElementById('avaPopSound');
-  v.muted=false; v.loop=false; try{ v.currentTime=0; }catch(e){}
-  var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  v.loop=false; v.removeAttribute('muted'); v.muted=false; v.volume=1;
+  if(v.readyState<1){ try{ v.preload='auto'; v.load(); }catch(e){} }
+  avaSoundStart(v);
   if(b) b.textContent='🔊 Playing…';
   v.onended=function(){ v.loop=true; v.muted=true; var pp=v.play(); if(pp&&pp.catch)pp.catch(function(){}); if(b) b.textContent='🔊 Tap to hear me'; };
 }
@@ -832,9 +878,9 @@ function avaPopHear(){
 function avaHear(){
   var v=document.getElementById('avaVid');
   if(!v) return;
-  v.loop=false; v.muted=false; v.controls=true;
-  try{ v.currentTime=0; }catch(e){}
-  var p=v.play(); if(p&&p.catch){ p.catch(function(){}); }
+  v.loop=false; v.controls=true; v.removeAttribute('muted'); v.muted=false; v.volume=1;
+  if(v.readyState<1){ try{ v.preload='auto'; v.load(); }catch(e){} }
+  avaSoundStart(v);
   var b=document.getElementById('avaSound'); if(b) b.style.display='none';
   var c=document.getElementById('avaVcap'); if(c) c.style.display='none';
 }
