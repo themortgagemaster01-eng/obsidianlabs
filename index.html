@@ -288,9 +288,48 @@
   .ava-duo .ava{max-width:none;margin:0}
   .marble{position:fixed;inset:0;z-index:-3;background:url('marble.jpg') center/cover no-repeat}
   .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.5),rgba(8,8,11,.62))}
+  .marble{display:none}
+  /* === WOW: skyline video page background === */
+  .bgvid{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-6;background:#06070c}
+  .bgvid-scrim{position:fixed;inset:0;z-index:-5;pointer-events:none;
+    background:linear-gradient(180deg,rgba(6,7,12,.72),rgba(6,7,12,.66) 42%,rgba(6,7,12,.80)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.10),transparent 60%)}
+  /* keep subtle grid + glows above the scrim for depth */
+  .holo{z-index:-4}.ambient{z-index:-4}
+  /* === starfield scoped to audit + pricing panels === */
+  .starzone{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;animation:starDrift 140s linear infinite}
+  #scanner,#pricing{background:radial-gradient(1100px 620px at 50% -8%,rgba(26,30,46,.55),transparent 62%),linear-gradient(180deg,#070810,#0a0b14 50%,#070810)}
+  #scanner{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
+  #pricing{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
+  #scanner>.wrap,#pricing>.wrap{position:relative;z-index:1}
+  /* === Ava corner chat widget === */
+  .ava-fab{position:fixed;right:22px;bottom:22px;z-index:130;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:var(--sans)}
+  .ava-bubble{position:relative;width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:#0b0b10;cursor:pointer;padding:0;box-shadow:0 12px 34px rgba(0,0,0,.5),0 0 30px rgba(200,205,216,.22);transition:transform .2s;animation:avaIn .5s .3s both}
+  .ava-bubble:hover{transform:scale(1.07)}
+  .ava-bubble img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+  .ava-dot{position:absolute;top:1px;right:1px;width:15px;height:15px;border-radius:50%;background:#39d98a;border:2px solid #0b0b10;animation:avapulse 2s infinite}
+  @keyframes avapulse{0%{box-shadow:0 0 0 0 rgba(57,217,138,.6)}70%{box-shadow:0 0 0 11px rgba(57,217,138,0)}100%{box-shadow:0 0 0 0 rgba(57,217,138,0)}}
+  @keyframes avaIn{from{opacity:0;transform:translateY(14px) scale(.8)}to{opacity:1;transform:none}}
+  .ava-pop{position:relative;width:322px;max-width:calc(100vw - 30px);border-radius:20px;padding:0;overflow:hidden;transform:translateY(16px) scale(.96);opacity:0;pointer-events:none;transform-origin:bottom right;transition:opacity .34s cubic-bezier(.2,.7,.3,1),transform .34s cubic-bezier(.2,.7,.3,1)}
+  .ava-fab.open .ava-pop{opacity:1;transform:none;pointer-events:auto}
+  .ava-fab.open .ava-bubble{display:none}
+  .ava-pop-head{display:flex;align-items:center;gap:11px;padding:17px 16px 12px}
+  .ava-pop-av{width:54px;height:54px;border-radius:14px;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+  .ava-pop-av video{width:100%;height:100%;object-fit:cover;display:block;background:#0b0b10}
+  .ava-pop-meta b{display:block;font-family:var(--disp);font-size:16.5px;color:#fff;letter-spacing:.3px}
+  .ava-pop-meta span{font-size:11.5px;color:#aeb4c2}
+  .ava-pop-msg{padding:0 16px 13px;font-size:13.5px;color:#e0e3ea;line-height:1.55}
+  .ava-pop-cta{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px}
+  .ava-sound2{background:rgba(255,255,255,.06);border:1px solid var(--gb);color:#eef1f6;border-radius:11px;padding:10px 12px;font-weight:700;font-size:12.5px;cursor:pointer;transition:border-color .15s}
+  .ava-sound2:hover{border-color:#cdd1db}
+  .ava-pop-btn{width:100%;padding:11px}
+  .ava-x{position:absolute;top:9px;right:11px;z-index:6;background:rgba(255,255,255,.10);border:none;color:#cdd1db;width:27px;height:27px;border-radius:50%;font-size:17px;line-height:1;cursor:pointer;transition:background .15s}
+  .ava-x:hover{background:rgba(255,255,255,.2);color:#fff}
+  @media(max-width:560px){.ava-fab{right:12px;bottom:12px}.ava-bubble{width:56px;height:56px}}
 </style>
 </head>
 <body>
+<video class="bgvid" id="bgvid" poster="skyline-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="skyline.mp4" type="video/mp4"></video>
+<div class="bgvid-scrim"></div>
 <div class="marble"></div>
 <div class="holo"></div>
 <div class="ambient"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
@@ -331,7 +370,7 @@
         <div class="kpi"><div class="l">Leads / mo</div><div class="n" data-count="42" data-suffix="%" data-prefix="+">+0%</div><div class="bar"><i data-w="82"></i></div></div>
         <div class="kpi"><div class="l">Calls</div><div class="n" data-count="31" data-suffix="%" data-prefix="+">+0%</div><div class="bar"><i data-w="68"></i></div></div>
         <div class="kpi"><div class="l">Load time</div><div class="n" data-count="0.9" data-suffix="s" data-dec="1">0s</div><div class="bar"><i data-w="94"></i></div></div>
-        <div class="dashwide"><div class="av"><img src="avaintro-avatar.jpg" alt="Ava"></div><div class="t"><b>Ava captured 7 leads</b> overnight — all booked into the calendar before the doors opened.</div></div>
+        <div class="dashwide"><div class="t"><b>Ava captured 7 leads</b> overnight — all booked into the calendar before the doors opened.</div></div>
       </div>
     </div>
     <div class="herophone"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&amp;fit=crop&amp;w=320&amp;q=72" alt="A mobile app we built"></div>
@@ -586,6 +625,25 @@
   <p style="margin-top:8px;opacity:.7">Demo concept · team headshots & metrics are placeholders.</p>
 </footer>
 
+<div class="ava-fab" id="avaFab">
+  <div class="ava-pop glass" id="avaPop">
+    <button class="ava-x" id="avaX" aria-label="Close chat">&times;</button>
+    <div class="ava-pop-head">
+      <div class="ava-pop-av"><video id="avaPopVid" poster="avaintro-avatar.jpg" muted loop playsinline preload="none"><source src="avaintro.mp4" type="video/mp4"></video></div>
+      <div class="ava-pop-meta"><b>Ava · Obsidian Labs</b><span>● online — replies in seconds</span></div>
+    </div>
+    <div class="ava-pop-msg">Hi! I'm Ava 👋 I answer questions, capture leads, and book calls 24/7 — exactly like the assistant we'd build into your site. Want to see what I'd do for yours?</div>
+    <div class="ava-pop-cta">
+      <button class="ava-sound2" id="avaPopSound" onclick="avaPopHear()">🔊 Tap to hear me</button>
+      <a class="btn pri ava-pop-btn" href="#scanner" onclick="document.getElementById('avaFab').classList.remove('open')">Claim your free audit</a>
+    </div>
+  </div>
+  <button class="ava-bubble" id="avaBubble" aria-label="Chat with Ava">
+    <img src="avaintro-avatar.jpg" alt="Ava">
+    <span class="ava-dot"></span>
+  </button>
+</div>
+
 <script>
 function animateCount(el){var tgt=parseFloat(el.getAttribute('data-count')),dec=+(el.getAttribute('data-dec')||0),pre=el.getAttribute('data-prefix')||'',suf=el.getAttribute('data-suffix')||'';var t0=performance.now();
   function tick(now){var p=Math.min(1,(now-t0)/1100);var e=1-Math.pow(1-p,3);el.textContent=pre+(tgt*e).toFixed(dec)+suf;if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
@@ -668,23 +726,63 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
   window.addEventListener('pointermove',move,{passive:false});
   window.addEventListener('pointerup',function(){drag=false;});
 })();
-(function(){var f=document.createElement('div');f.className='starfield';document.body.appendChild(f);
-  var N=window.innerWidth<600?46:92,h='';
-  for(var i=0;i<N;i++){var sz=(Math.random()*2+0.6).toFixed(2);
-    h+='<div class="star" style="width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;--d:'+(2.4+Math.random()*4).toFixed(2)+'s;--dl:'+(Math.random()*5).toFixed(2)+'s;--o:'+(0.45+Math.random()*0.5).toFixed(2)+'"></div>';}
-  f.innerHTML=h;})();
+/* starfield scoped to the audit + pricing panels only */
 (function(){
+  var N=window.innerWidth<600?26:52;
+  function fill(host){ if(!host) return;
+    var f=document.createElement('div');f.className='starzone';var h='';
+    for(var i=0;i<N;i++){var sz=(Math.random()*2+0.6).toFixed(2);
+      h+='<div class="star" style="width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*100).toFixed(2)+'%;--d:'+(2.4+Math.random()*4).toFixed(2)+'s;--dl:'+(Math.random()*5).toFixed(2)+'s;--o:'+(0.45+Math.random()*0.5).toFixed(2)+'"></div>';}
+    f.innerHTML=h; host.insertBefore(f, host.firstChild);
+  }
+  fill(document.getElementById('scanner'));
+  fill(document.getElementById('pricing'));
+})();
+/* shooting stars scoped inside the star panels (not over the skyline) */
+(function(){
+  var zones=Array.prototype.slice.call(document.querySelectorAll('.starzone'));
+  if(!zones.length) return;
   function shoot(){
+    var host=zones[Math.floor(Math.random()*zones.length)];
     var s=document.createElement('div'); s.className='shootingstar';
+    s.style.position='absolute'; s.style.zIndex='0';
     s.style.left=(Math.random()*62+4)+'%'; s.style.top=(Math.random()*42+2)+'%';
     var dur=(1.0+Math.random()*0.8).toFixed(2);
     s.style.animation='shoot '+dur+'s ease-out forwards';
-    document.body.appendChild(s);
+    host.appendChild(s);
     setTimeout(function(){ if(s&&s.parentNode) s.parentNode.removeChild(s); }, dur*1000+120);
   }
-  function loop(){ shoot(); setTimeout(loop, 3200+Math.random()*5200); }
-  setTimeout(loop, 1800);
+  function loop(){ shoot(); setTimeout(loop, 3600+Math.random()*5200); }
+  setTimeout(loop, 2200);
 })();
+
+/* skyline bg video: respect data-saver / very slow networks (poster-only) */
+(function(){
+  var v=document.getElementById('bgvid'); if(!v) return;
+  var c=navigator.connection||{};
+  if(c.saveData===true || /(^|-)2g$/.test(c.effectiveType||'')){ v.removeAttribute('autoplay'); try{v.pause();}catch(e){} return; }
+  var p=v.play(); if(p&&p.catch) p.catch(function(){});
+})();
+
+/* Ava corner chat widget: auto-greet after load, dismissible, muted preview + tap-to-hear */
+(function(){
+  var fab=document.getElementById('avaFab'); if(!fab) return;
+  var bubble=document.getElementById('avaBubble'), x=document.getElementById('avaX'), vid=document.getElementById('avaPopVid');
+  function playPreview(){ if(!vid) return; vid.muted=true; vid.loop=true; var p=vid.play(); if(p&&p.catch)p.catch(function(){}); }
+  function open(){ fab.classList.add('open'); playPreview(); }
+  function close(){ fab.classList.remove('open'); if(vid){ try{vid.pause();}catch(e){} } }
+  if(bubble) bubble.addEventListener('click', open);
+  if(x) x.addEventListener('click', function(e){ e.stopPropagation(); close(); });
+  setTimeout(open, 3000);
+})();
+function avaPopHear(){
+  var v=document.getElementById('avaPopVid'); if(!v) return;
+  var b=document.getElementById('avaPopSound');
+  v.muted=false; v.loop=false; try{ v.currentTime=0; }catch(e){}
+  var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  if(b) b.textContent='🔊 Playing…';
+  v.onended=function(){ v.loop=true; v.muted=true; var pp=v.play(); if(pp&&pp.catch)pp.catch(function(){}); if(b) b.textContent='🔊 Tap to hear me'; };
+}
 
 /* Ava intro video: unmute + restart + native controls on tap (audio needs a user gesture) */
 function avaHear(){
