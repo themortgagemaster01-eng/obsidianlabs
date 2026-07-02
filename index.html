@@ -334,15 +334,21 @@
   /* === WOW: skyline video page background === */
   .bgvid{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-6;background:#06070c}
   .bgvid-scrim{position:fixed;inset:0;z-index:-5;pointer-events:none;
-    background:linear-gradient(180deg,rgba(6,7,12,.72),rgba(6,7,12,.66) 42%,rgba(6,7,12,.80)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.10),transparent 60%)}
+    background:linear-gradient(180deg,rgba(6,7,12,.42),rgba(6,7,12,.36) 42%,rgba(6,7,12,.5)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.12),transparent 60%)}
   /* keep subtle grid + glows above the scrim for depth */
   .holo{z-index:-4}.ambient{z-index:-4}
   /* === starfield scoped to audit + pricing panels === */
   .starzone{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;animation:starDrift 140s linear infinite}
-  #scanner,#pricing{background:radial-gradient(1100px 620px at 50% -8%,rgba(26,30,46,.55),transparent 62%),linear-gradient(180deg,#070810,#0a0b14 50%,#070810)}
+  #scanner{background:radial-gradient(1100px 620px at 50% -8%,rgba(26,30,46,.55),transparent 62%),linear-gradient(180deg,#070810,#0a0b14 50%,#070810)}
+  /* pricing panel background removed so the fixed skyline video shows through the whole section */
+  #pricing{background:transparent}
   #scanner{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
-  #pricing{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
   #scanner>.wrap,#pricing>.wrap{position:relative;z-index:1}
+  /* legibility over the brighter skyline (global scrim lightened) */
+  .hero h1,.hero p,.h2,h3.disp,h4.disp{text-shadow:0 2px 20px rgba(3,4,9,.82),0 1px 4px rgba(3,4,9,.72)}
+  .sub,.eyebrow{text-shadow:0 1px 12px rgba(3,4,9,.8)}
+  .offerbar,.pills{text-shadow:0 1px 8px rgba(3,4,9,.6)}
+  #pricing .trust span{text-shadow:0 1px 10px rgba(3,4,9,.82)}
   /* === Ava corner chat widget === */
   .ava-fab{position:fixed;right:22px;bottom:22px;z-index:130;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:var(--sans)}
   .ava-bubble{position:relative;width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:#0b0b10;cursor:pointer;padding:0;box-shadow:0 12px 34px rgba(0,0,0,.5),0 0 30px rgba(200,205,216,.22);transition:transform .2s;animation:avaIn .5s .3s both}
@@ -823,7 +829,7 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
     f.innerHTML=h; host.insertBefore(f, host.firstChild);
   }
   fill(document.getElementById('scanner'));
-  fill(document.getElementById('pricing'));
+  /* pricing no longer gets a starfield panel — the skyline video shows through */
 })();
 /* shooting stars scoped inside the star panels (not over the skyline) */
 (function(){
@@ -863,10 +869,22 @@ var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown'
   setTimeout(open, 3000);
 })();
 function avaSoundStart(v){
+  if(!v) return;
+  /* run synchronously inside the tap gesture */
+  v.loop=false;
+  v.removeAttribute('muted');
+  v.muted=false;
+  v.volume=1;
   try{ v.currentTime=0; }catch(e){}
+  if(v.readyState<1){ try{ v.preload='auto'; v.load(); }catch(e){} }
   var p=v.play();
   if(p&&p.then){ p.then(function(){ v.muted=false; }).catch(function(){ v.muted=false; try{ var q=v.play(); if(q&&q.catch)q.catch(function(){}); }catch(e){} }); }
-  if(v.readyState<2){ var seek=function(){ try{ v.currentTime=0; }catch(e){} v.muted=false; v.removeEventListener('loadeddata',seek); }; v.addEventListener('loadeddata',seek); }
+  /* iOS: the hardware silent switch mutes inline video audio, and unmuting an
+     inline muted-autoplay video mid-play is unreliable. Native fullscreen plays
+     audio regardless of the silent switch — call it in the same gesture. */
+  if(typeof v.webkitEnterFullscreen==='function'){ try{ v.webkitEnterFullscreen(); }catch(e){} }
+  else if(typeof v.requestFullscreen==='function' && /iP(hone|od|ad)/i.test(navigator.userAgent)){ try{ v.requestFullscreen(); }catch(e){} }
+  /* desktop: no fullscreen forced — inline unmuted playback is fine */
 }
 function avaPopHear(){
   var v=document.getElementById('avaPopVid'); if(!v) return;
