@@ -1060,8 +1060,10 @@ function avaHear(){
     c.addEventListener('blur',function(){ paused=false; });
     c.addEventListener('click',function(){ i=k; setActive(k); });
   });
-  if(!reduce){ setActive(0); timer=setInterval(step,1400); }
-  else { setActive(2); }
+  /* Robert wants the chips to always animate; run the cycle regardless of
+     reduced-motion (just gentler/slower when the user prefers reduced motion). */
+  setActive(0);
+  timer=setInterval(step, reduce?2100:1400);
 })();
 
 </script>
