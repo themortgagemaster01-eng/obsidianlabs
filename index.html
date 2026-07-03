@@ -24,8 +24,10 @@
   .sub{color:var(--mut);max-width:640px;margin:0 auto 44px;font-size:16.5px} .center{text-align:center}
   section{padding:84px 0;position:relative}
   .glass{background:var(--glass);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border:1px solid var(--gb);border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:14px 26px;border-radius:12px;font-size:14.5px;cursor:pointer;border:none;transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s,filter .18s;letter-spacing:.3px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:14px 26px;border-radius:12px;font-size:14.5px;cursor:pointer;border:none;transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s,filter .18s;letter-spacing:.3px;touch-action:manipulation}
   .btn:hover{transform:translateY(-2px) scale(1.02)}
+  /* instant pressed feedback on tap/click (beats hover; magnetic inline transform is cleared on pointerdown) */
+  .btn.pri:active,.btn.ghost:active{transform:scale(.96);filter:brightness(.93)}
   .btn.pri{background:linear-gradient(120deg,#f3f5f9,#b9bfcd);color:#0a0a0e;box-shadow:0 14px 30px rgba(200,205,216,.22)}
   .btn.pri:hover{box-shadow:0 18px 40px rgba(200,205,216,.34)}
   .btn.ghost{background:rgba(255,255,255,.04);color:var(--ink);border:1.5px solid rgba(255,255,255,.22)}
@@ -131,7 +133,9 @@
   .scanrow{display:flex;gap:10px;margin-top:6px} @media(max-width:560px){.scanrow{flex-direction:column}}
   .scanrow input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;color:var(--ink);padding:15px 16px;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s}
   .scanrow input:focus{border-color:#cdd1db}
-  .scan-note{font-size:12px;color:var(--mut);margin-top:12px;text-align:center}
+  .scan-note{font-size:12px;color:var(--mut);margin-top:12px;text-align:center;transition:color .15s}
+  .scan-note.hint{color:#ffd27a;font-weight:600}
+  .scanrow input.needsurl{border-color:#ffd27a;box-shadow:0 0 0 2px rgba(255,210,122,.18)}
   .scanload{text-align:center;padding:18px 0 4px;display:none}.scanload.on{display:block}
   .scanload .sp{width:34px;height:34px;border:3px solid rgba(255,255,255,.14);border-top-color:#eef1f6;border-radius:50%;margin:0 auto 10px;animation:spin2 .9s linear infinite}
   .scanload .lt{font-size:13px;color:#cdd1db}
@@ -440,9 +444,9 @@
     <div class="scanbox glass">
       <div class="scanrow">
         <input id="scanurl" type="url" inputmode="url" placeholder="yourbusiness.com" autocomplete="off">
-        <button class="btn pri" onclick="runScan()" style="padding:15px 24px">Scan my site</button>
+        <button class="btn pri" id="scanBtn" type="button" style="padding:15px 24px">Scan my site</button>
       </div>
-      <div class="scan-note">An instant snapshot of your site's health. No signup — results in seconds.</div>
+      <div class="scan-note" id="scannote">An instant snapshot of your site's health. No signup — results in seconds.</div>
       <div class="scanload" id="scanload"><div class="sp"></div><div class="lt" id="scanlt">Fetching your site…</div></div>
       <div class="scoring" id="scoring">
         <div class="scoreorb"><div class="ring" id="scorering"><div class="num" id="scorenum">0</div></div><div class="cap">Obsidian Score</div></div>
@@ -763,8 +767,12 @@ var cg=document.getElementById('cglow');
 window.addEventListener('pointermove',function(e){cg.style.left=e.clientX+'px';cg.style.top=e.clientY+'px';cg.style.opacity='1';},{passive:true});
 if(window.matchMedia&&window.matchMedia('(pointer:fine)').matches){
   [].forEach.call(document.querySelectorAll('.btn.pri'),function(btn){btn.style.transition='transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .18s';
-    btn.addEventListener('pointermove',function(e){var r=btn.getBoundingClientRect();var x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);btn.style.transform='translate('+(x*0.3)+'px,'+(y*0.3)+'px) scale(1.04)';});
-    btn.addEventListener('pointerleave',function(){btn.style.transform='';});});
+    var pressing=false;
+    btn.addEventListener('pointermove',function(e){if(pressing)return;var r=btn.getBoundingClientRect();var x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);btn.style.transform='translate('+(x*0.3)+'px,'+(y*0.3)+'px) scale(1.04)';});
+    /* freeze the button at its true position while pressed so mousedown+mouseup land on it and the click fires first time (magnetic drift was swallowing clicks) */
+    btn.addEventListener('pointerdown',function(){pressing=true;btn.style.transform='';});
+    btn.addEventListener('pointerup',function(){pressing=false;});
+    btn.addEventListener('pointerleave',function(){pressing=false;btn.style.transform='';});});
 }
 
 function normUrl(u){u=(u||'').trim();if(!u)return'';if(!/^https?:\/\//i.test(u))u='https://'+u;return u;}
@@ -778,15 +786,26 @@ function seededScores(host){
   function pick(salt,lo,hi){var x=Math.abs(Math.sin((h%99991)*0.0001+salt*12.9898))*43758.5453;x=x-Math.floor(x);return Math.round(lo+x*(hi-lo));}
   return{perf:pick(1,38,66),a11y:pick(2,48,73),seo:pick(3,44,72),bp:pick(4,52,75)};
 }
+var _scanIv=null,_scanTo=null;
+function scanHint(on){
+  var note=document.getElementById('scannote'),input=document.getElementById('scanurl');
+  if(note){note.textContent=on?'Please enter a website address, e.g. yourbusiness.com':"An instant snapshot of your site's health. No signup — results in seconds.";note.classList.toggle('hint',!!on);}
+  if(input)input.classList.toggle('needsurl',!!on);
+}
 function runScan(){
-  var url=normUrl(document.getElementById('scanurl').value);
-  if(!url||!/^https?:\/\/[^\s.]+\.[a-z]{2,}/i.test(url)){alert('Enter a valid website address, e.g. yourbusiness.com');return;}
+  var input=document.getElementById('scanurl');
+  var url=normUrl(input.value);
+  if(!url||!/^https?:\/\/[^\s.]+\.[a-z]{2,}/i.test(url)){scanHint(true);try{input.focus();}catch(e){}return;}
+  scanHint(false);
+  /* clear any in-flight scan so a second scan on a new URL always starts cleanly on the first click */
+  if(_scanIv){clearInterval(_scanIv);_scanIv=null;}
+  if(_scanTo){clearTimeout(_scanTo);_scanTo=null;}
   var host=url.replace(/^https?:\/\//i,'').replace(/\/.*$/,'').replace(/^www\./i,'');
   var load=document.getElementById('scanload');document.getElementById('scoring').classList.remove('on');load.classList.add('on');
   var lt=document.getElementById('scanlt'),i=0;lt.textContent=LSTEPS[0];
-  var iv=setInterval(function(){i++;if(i<LSTEPS.length)lt.textContent=LSTEPS[i];},620);
+  _scanIv=setInterval(function(){i++;if(i<LSTEPS.length)lt.textContent=LSTEPS[i];},620);
   var s=seededScores(host);
-  setTimeout(function(){clearInterval(iv);showResult(url,s.perf,s.a11y,s.seo,s.bp,true);},2650);
+  _scanTo=setTimeout(function(){if(_scanIv){clearInterval(_scanIv);_scanIv=null;}showResult(url,s.perf,s.a11y,s.seo,s.bp,true);},2650);
 }
 function showResult(url,perf,a11y,seo,bp,isEst){
   document.getElementById('scanload').classList.remove('on');
@@ -806,7 +825,8 @@ function fallbackScan(url){
   img.onload=function(){finish(true);};img.onerror=function(){finish(true);};
   setTimeout(function(){finish(false);},6000);img.src=url.replace(/\/$/,'')+'/favicon.ico?'+Date.now();
 }
-var _su=document.getElementById('scanurl');if(_su)_su.addEventListener('keydown',function(e){if(e.key==='Enter')runScan();});
+var _su=document.getElementById('scanurl');if(_su){_su.addEventListener('keydown',function(e){if(e.key==='Enter')runScan();});_su.addEventListener('input',function(){scanHint(false);});}
+var _sb=document.getElementById('scanBtn');if(_sb)_sb.addEventListener('click',function(e){e.preventDefault();runScan();});
 
 (function(){var c=document.getElementById('compare');if(!c)return;
   var before=document.getElementById('cbefore'),handle=document.getElementById('chandle'),
