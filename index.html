@@ -51,9 +51,9 @@
   .hero{padding:60px 0 24px;text-align:center;position:relative}
   .heromark{display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 22px;position:relative}
   .heromark::before{content:"";position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:240px;height:240px;background:radial-gradient(circle,rgba(190,196,210,.20),transparent 65%);z-index:-1;pointer-events:none}
-  .crest{width:clamp(58px,9vw,84px);height:auto;filter:drop-shadow(0 10px 26px rgba(174,180,194,.35))}
-  .wordmark{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,27px);letter-spacing:.42em;text-transform:uppercase;color:#fff;-webkit-text-fill-color:#fff;text-shadow:0 2px 18px rgba(3,4,9,.55),0 1px 3px rgba(3,4,9,.5);padding-left:.42em}
-  .wordmark+.tagrule{font-family:var(--body,Inter);font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(3,4,9,.6)}
+  .crest{width:clamp(76px,11vw,108px);height:auto;filter:drop-shadow(0 12px 30px rgba(199,154,63,.5)) drop-shadow(0 0 16px rgba(230,197,116,.42))}
+  .wordmark{font-family:var(--disp);font-weight:700;font-size:clamp(20px,3vw,27px);letter-spacing:.42em;text-transform:uppercase;color:#fff;-webkit-text-fill-color:#fff;text-shadow:0 2px 22px rgba(3,4,9,.75),0 2px 6px rgba(3,4,9,.65),0 1px 3px rgba(3,4,9,.6);padding-left:.42em}
+  .wordmark+.tagrule{font-family:var(--body,Inter);font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:#fff;text-shadow:0 1px 12px rgba(3,4,9,.75),0 1px 4px rgba(3,4,9,.6)}
   .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(38px,6.6vw,68px);line-height:1.03;margin:6px auto 16px;max-width:16ch;letter-spacing:.5px}
   .hero p{color:#c4c9d4;max-width:620px;margin:0 auto 22px;font-size:18px}
   .pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
@@ -283,7 +283,7 @@
   .heromark{perspective:780px}
   .crest{transform-style:preserve-3d;animation:crestSpin 16s linear infinite,crestHolo 7s ease-in-out infinite;will-change:transform,filter}
   @keyframes crestSpin{from{transform:rotateX(8deg) rotateY(0deg)}to{transform:rotateX(8deg) rotateY(360deg)}}
-  @keyframes crestHolo{0%,100%{filter:drop-shadow(0 10px 26px rgba(174,180,194,.42)) hue-rotate(0deg) saturate(1.05)}33%{filter:drop-shadow(0 12px 32px rgba(199,154,63,.5)) hue-rotate(40deg) saturate(1.6)}66%{filter:drop-shadow(0 12px 32px rgba(120,170,255,.45)) hue-rotate(-32deg) saturate(1.5)}}
+  @keyframes crestHolo{0%,100%{filter:drop-shadow(0 12px 30px rgba(230,197,116,.55)) drop-shadow(0 0 18px rgba(230,197,116,.4)) hue-rotate(0deg) saturate(1.18)}33%{filter:drop-shadow(0 14px 40px rgba(199,154,63,.72)) drop-shadow(0 0 24px rgba(230,197,116,.62)) hue-rotate(30deg) saturate(1.75)}66%{filter:drop-shadow(0 14px 36px rgba(120,170,255,.5)) drop-shadow(0 0 18px rgba(230,197,116,.42)) hue-rotate(-26deg) saturate(1.55)}}
   /* Ava avatar photo in hero dashboard */
   .dashwide .av img{width:100%;height:100%;object-fit:cover;border-radius:11px;display:block}
   .offerbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:4px auto 0}
@@ -346,9 +346,9 @@
   .marble::after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(8,8,11,.5),rgba(8,8,11,.62))}
   .marble{display:none}
   /* === WOW: skyline video page background === */
-  .bgvid{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-6;background:#06070c}
+  .bgvid{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-6;background:#06070c;filter:brightness(1.08) contrast(1.08) saturate(1.15)}
   .bgvid-scrim{position:fixed;inset:0;z-index:-5;pointer-events:none;
-    background:linear-gradient(180deg,rgba(6,7,12,.42),rgba(6,7,12,.36) 42%,rgba(6,7,12,.5)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.12),transparent 60%)}
+    background:linear-gradient(180deg,rgba(6,7,12,.26),rgba(6,7,12,.22) 42%,rgba(6,7,12,.30)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.12),transparent 60%)}
   /* keep subtle grid + glows above the scrim for depth */
   .holo{z-index:-4}.ambient{z-index:-4}
   /* === star video background scoped to audit panel === */
@@ -359,12 +359,15 @@
   #scanner{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
   #scanner>.wrap,#pricing>.wrap{position:relative;z-index:1}
   /* legibility over the brighter skyline (global scrim lightened) */
-  .hero h1,.hero p,.h2,h3.disp,h4.disp{text-shadow:0 2px 20px rgba(3,4,9,.82),0 1px 4px rgba(3,4,9,.72)}
+  .hero h1,.hero p,.h2,h3.disp,h4.disp{text-shadow:0 2px 24px rgba(3,4,9,.92),0 2px 8px rgba(3,4,9,.82),0 1px 3px rgba(3,4,9,.88)}
+  /* small local scrim so hero text stays crisp on the more vivid video */
+  .hero::before{content:"";position:absolute;left:50%;top:64px;transform:translateX(-50%);width:min(880px,94%);height:520px;z-index:0;pointer-events:none;background:radial-gradient(60% 55% at 50% 42%,rgba(5,6,11,.5),rgba(5,6,11,.28) 58%,transparent 78%)}
+  .hero>.wrap{position:relative;z-index:1}
   /* hero headline 2nd line: solid bright white, as punchy as the first line */
-  .hero h1 .herohl{color:#fff;-webkit-text-fill-color:#fff;background:none;text-shadow:0 2px 22px rgba(3,4,9,.8),0 1px 4px rgba(3,4,9,.7)}
-  .sub,.eyebrow{text-shadow:0 1px 12px rgba(3,4,9,.8)}
-  .offerbar,.pills{text-shadow:0 1px 8px rgba(3,4,9,.6)}
-  #pricing .trust span{text-shadow:0 1px 10px rgba(3,4,9,.82)}
+  .hero h1 .herohl{color:#fff;-webkit-text-fill-color:#fff;background:none;text-shadow:0 2px 24px rgba(3,4,9,.9),0 2px 8px rgba(3,4,9,.8),0 1px 3px rgba(3,4,9,.85)}
+  .sub,.eyebrow{text-shadow:0 1px 14px rgba(3,4,9,.9),0 1px 4px rgba(3,4,9,.7)}
+  .offerbar,.pills{text-shadow:0 1px 10px rgba(3,4,9,.72)}
+  #pricing .trust span{text-shadow:0 1px 12px rgba(3,4,9,.88)}
   /* === Ava corner chat widget === */
   .ava-fab{position:fixed;right:22px;bottom:22px;z-index:130;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:var(--sans)}
   .ava-bubble{position:relative;width:64px;height:64px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:#0b0b10;cursor:pointer;padding:0;box-shadow:0 12px 34px rgba(0,0,0,.5),0 0 30px rgba(200,205,216,.22);transition:transform .2s;animation:avaIn .5s .3s both}
@@ -418,25 +421,25 @@
   <div class="heromark reveal">
     <svg class="crest" viewBox="0 0 80 112" fill="none" aria-label="Obsidian Labs">
       <defs><linearGradient id="pl" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#f6f8fc"/><stop offset=".5" stop-color="#aeb4c2"/><stop offset="1" stop-color="#646977"/>
+        <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#dfe4ee"/><stop offset="1" stop-color="#8b90a0"/>
       </linearGradient></defs>
-      <path d="M40 3 L71 41 L40 109 L9 41 Z" stroke="url(#pl)" stroke-width="1.7" stroke-linejoin="round"/>
-      <path d="M9 41 L71 41" stroke="url(#pl)" stroke-width="1.2" opacity=".85"/>
-      <path d="M40 3 L40 41 M24 23 L40 41 L56 23" stroke="url(#pl)" stroke-width="1" opacity=".6"/>
-      <path d="M24 41 L40 73 L56 41" stroke="url(#pl)" stroke-width="1" opacity=".5"/>
-      <path d="M9 41 L40 109 L71 41" stroke="url(#pl)" stroke-width=".7" opacity=".3"/>
+      <path d="M40 3 L71 41 L40 109 L9 41 Z" stroke="url(#pl)" stroke-width="2.3" stroke-linejoin="round"/>
+      <path d="M9 41 L71 41" stroke="url(#pl)" stroke-width="1.6" opacity=".95"/>
+      <path d="M40 3 L40 41 M24 23 L40 41 L56 23" stroke="url(#pl)" stroke-width="1.3" opacity=".82"/>
+      <path d="M24 41 L40 73 L56 41" stroke="url(#pl)" stroke-width="1.3" opacity=".72"/>
+      <path d="M9 41 L40 109 L71 41" stroke="url(#pl)" stroke-width=".95" opacity=".5"/>
     </svg>
     <div class="wordmark">Obsidian Labs</div>
     <div class="tagrule">Websites · Custom Business Apps · AI Automation</div>
   </div>
-  <h1 class="disp reveal">Your competition still looks like 2014.<br><span class="herohl">You'll look like 2030.</span></h1>
+  <h1 class="disp reveal">Specializing in Custom Website Makeovers</h1>
   <p class="reveal">We rebuild outdated local-business websites into premium, AI-powered growth machines — <b style="color:#fff">built before you pay a cent</b>.</p>
   <div class="offerbar reveal"><span><b>5-day</b> free rebuild</span><span>from <b>$1,495</b> to own it</span><span><b>$0</b> if you walk away</span></div>
   <div class="pills reveal"><span>Websites</span><span>Custom Business Apps</span><span>AI Automation</span></div>
   <div class="hbtns reveal"><a class="btn pri" href="#scanner">Claim free AI website audit</a><a class="btn ghost" href="#forge">See how it works</a></div>
 
   <div class="mock glass reveal">
-    <div class="mockcap">Sample dashboard — illustrative of the lift a rebuilt Obsidian Labs site is built to deliver, not live data.</div>
+    <div class="mockcap">Sample dashboard — illustrative of a rebuild with Obsidian Labs.</div>
     <div class="browser">
       <div class="bbar"><i></i><i></i><i></i><span class="url">yourbusiness.com — crafted by Obsidian Labs</span></div>
       <div class="dash">
@@ -950,17 +953,30 @@ var _sb=document.getElementById('scanBtn');if(_sb)_sb.addEventListener('click',f
   function refresh(){ if(!btn) return; btn.textContent=muted?'🔇':'🔊';
     btn.classList.toggle('muted',muted);
     btn.setAttribute('aria-label',muted?'Unmute background music':'Mute background music'); }
-  function start(){ if(started) return; started=true; bg.volume=0;
+  function start(){ if(started) return; started=true; bg.muted=false; bg.volume=0;
     var p=bg.play();
-    if(p&&p.then){ p.then(function(){ fadeTo(target(),1000); }).catch(function(){ started=false; }); }
-    else { fadeTo(target(),1000); } }
+    if(p&&p.then){ p.then(function(){ if(!muted) fadeTo(target(),1000); }).catch(function(){ started=false; }); }
+    else { if(!muted) fadeTo(target(),1000); } }
   ['pointerdown','touchstart','keydown','scroll','click'].forEach(function(ev){
     window.addEventListener(ev,start,{once:true,passive:true}); });
   if(btn) btn.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation();
-    muted=!muted; if(!started) start(); fadeTo(target(),260); refresh(); });
+    muted=!muted;
+    if(!started) start();
+    if(muted){
+      /* hard, instant silence -- beats any in-flight fade or play() promise */
+      clearInterval(ft); bg.muted=true; bg.volume=0;
+      try{ bg.pause(); }catch(_){}
+    } else {
+      /* resume: unmute, make sure it's playing, then fade back up */
+      bg.muted=false;
+      if(bg.paused){ var r=bg.play(); if(r&&r.catch) r.catch(function(){}); }
+      fadeTo(target(),260);
+    }
+    refresh();
+  });
   window.__bgMusic={
     duck:function(){ ducked=true; fadeTo(0,220); },
-    unduck:function(){ ducked=false; if(started&&!muted) fadeTo(BASE,800); }
+    unduck:function(){ ducked=false; if(started&&!muted){ bg.muted=false; if(bg.paused){ var r=bg.play(); if(r&&r.catch) r.catch(function(){}); } fadeTo(BASE,800); } }
   };
   refresh();
 })();
