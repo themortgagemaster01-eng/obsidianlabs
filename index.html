@@ -253,7 +253,7 @@
   .ind .ic{position:relative;z-index:2;color:#fff;height:24px} .ind .ic svg{width:24px;height:24px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
   .ind .nm{position:relative;z-index:2;font-size:14px;font-weight:600;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
   .finalcta{max-width:860px;margin:0 auto;text-align:center;padding:62px 30px;border-radius:24px;background:linear-gradient(160deg,rgba(22,22,28,.86),rgba(8,8,11,.94));border:1px solid var(--gb);box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;overflow:hidden}
-  .finalcta>:not(.starzone){position:relative;z-index:2}
+  .finalcta>:not(.starvid):not(.starvid-scrim){position:relative;z-index:2}
   .finalcta h2{font-family:var(--disp);font-size:clamp(34px,5.4vw,58px);line-height:1.05;margin-bottom:12px}
   .finalcta p{color:#c4c9d4;font-size:17px;margin-bottom:26px}
   .finalcta .hbtns{justify-content:center}
@@ -270,15 +270,9 @@
   .pilimg{height:150px;border-radius:14px;background-size:cover;background-position:center;margin-bottom:18px;filter:grayscale(.18) contrast(1.05);box-shadow:inset 0 -46px 54px rgba(8,8,11,.66),inset 0 0 0 1px rgba(255,255,255,.06)}
   .pil,.price,.ind,.fphase,.tm,.aic{transition:box-shadow .3s ease,border-color .3s ease,transform .2s ease}
   .pil:hover,.price:hover,.ind:hover,.fphase:hover,.tm:hover,.aic:hover{border-color:rgba(255,255,255,.26);box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 42px rgba(220,225,235,.12)}
-  /* twinkling starfield over the obsidian night-sky marble */
-  .starfield{position:fixed;inset:-6%;z-index:-2;pointer-events:none;animation:starDrift 140s linear infinite}
-  .star{position:absolute;border-radius:50%;background:#fff;opacity:.05;animation:twinkle var(--d,4s) ease-in-out infinite;animation-delay:var(--dl,0s);box-shadow:0 0 6px rgba(255,255,255,.45)}
-  @keyframes twinkle{0%,100%{opacity:.05;transform:scale(.7)}50%{opacity:var(--o,.85);transform:scale(1.18)}}
-  @keyframes starDrift{from{transform:translate(0,0)}to{transform:translate(-34px,-22px)}}
-  @media(prefers-reduced-motion:reduce){.star{animation:none;opacity:.4}.starfield{animation:none}}
-  /* shooting stars (blend with starfield) */
-  .shootingstar{position:fixed;z-index:-2;height:2px;width:130px;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(232,238,255,.95));border-radius:3px;opacity:0;filter:drop-shadow(0 0 7px rgba(200,212,255,.8))}
-  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(var(--ang,20deg)) scaleX(.2)}8%{opacity:1}100%{opacity:0;transform:translate(var(--tx,470px),var(--ty,172px)) rotate(var(--ang,20deg)) scaleX(1)}}
+  /* star VIDEO background for #scanner (audit) + .finalcta (final CTA) */
+  .starvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;pointer-events:none;background:#06070c}
+  .starvid-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,7,12,.55),rgba(6,7,12,.44) 45%,rgba(6,7,12,.62))}
   /* AI cards: stock image behind the icon */
   .aic{position:relative;overflow:hidden}
   .aic .aicbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(.66) saturate(1.1);transition:transform .6s ease,filter .4s}
@@ -357,9 +351,9 @@
     background:linear-gradient(180deg,rgba(6,7,12,.42),rgba(6,7,12,.36) 42%,rgba(6,7,12,.5)),radial-gradient(1200px 700px at 80% -10%,rgba(120,140,200,.12),transparent 60%)}
   /* keep subtle grid + glows above the scrim for depth */
   .holo{z-index:-4}.ambient{z-index:-4}
-  /* === starfield scoped to audit + pricing panels === */
-  .starzone{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;animation:starDrift 140s linear infinite}
-  #scanner{background:radial-gradient(1100px 620px at 50% -8%,rgba(26,30,46,.55),transparent 62%),linear-gradient(180deg,#070810,#0a0b14 50%,#070810)}
+  /* === star video background scoped to audit panel === */
+  #scanner{position:relative;overflow:hidden;background:radial-gradient(1100px 620px at 50% -8%,rgba(26,30,46,.55),transparent 62%),linear-gradient(180deg,#070810,#0a0b14 50%,#070810)}
+  #scanner>.wrap{position:relative;z-index:2}
   /* pricing panel background removed so the fixed skyline video shows through the whole section */
   #pricing{background:transparent}
   #scanner{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(255,255,255,.05)}
@@ -455,7 +449,7 @@
   </div>
 </div></section>
 
-<section id="scanner"><div class="wrap">
+<section id="scanner"><video class="starvid" autoplay muted loop playsinline preload="metadata" poster="stars-poster.jpg" aria-hidden="true"><source src="stars.mp4" type="video/mp4"></video><div class="starvid-scrim"></div><div class="wrap">
   <div class="center reveal"><div class="eyebrow">Free instant audit</div><h2 class="h2 disp">How much is your website <span class="grad">costing you?</span></h2>
   <p class="sub">Drop in any URL. We scan the signals behind speed, mobile, SEO, and trust — and show you exactly where you're leaking customers.</p></div>
   <div class="scanwrap reveal">
@@ -710,6 +704,7 @@
 
 <section id="cta"><div class="wrap">
   <div class="finalcta reveal">
+    <video class="starvid" autoplay muted loop playsinline preload="metadata" poster="stars-poster.jpg" aria-hidden="true"><source src="stars.mp4" type="video/mp4"></video><div class="starvid-scrim"></div>
     <div class="eyebrow" style="margin-bottom:14px">Your move</div>
     <h2 class="disp">Ready to look <span class="grad">expensive?</span></h2>
     <p>We'll rebuild your site in 5 days and let you try it free. Love it? It's <b style="color:#fff">$2,500 to own</b>. Don't? You owe nothing.</p>
@@ -921,68 +916,6 @@ var _sb=document.getElementById('scanBtn');if(_sb)_sb.addEventListener('click',f
     var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){fire();io.disconnect();}});},{threshold:0.4});
     io.observe(c);
   } else { fire(); }
-})();
-/* === Enhanced starfield: dense, twinkling stars + comets, scoped to dark panels === */
-(function(){
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var mobile=window.innerWidth<600;
-  function starCount(host){
-    var r=host.getBoundingClientRect();
-    var area=(r.width||900)*(r.height||560);
-    var n=Math.round(area/(mobile?4200:2500));           /* ~3x denser than before */
-    return Math.max(mobile?90:150, Math.min(mobile?150:300, n));
-  }
-  function fill(host){
-    if(!host) return null;
-    var f=document.createElement('div'); f.className='starzone';
-    var N=starCount(host), h='';
-    for(var k=0;k<N;k++){
-      var depth=Math.random();                              /* 0 far → 1 near */
-      var sz=(0.5+depth*2.6).toFixed(2);                    /* 0.5–3.1px, size = depth */
-      var omax=(0.32+depth*0.63).toFixed(2);                /* brighter when nearer */
-      var dur=(1.8+Math.random()*5.0).toFixed(2);           /* varied twinkle speed */
-      var dl=(Math.random()*7).toFixed(2);                  /* varied delay → shimmer */
-      h+='<div class="star" style="width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100).toFixed(2)
-        +'%;top:'+(Math.random()*100).toFixed(2)+'%;--d:'+dur+'s;--dl:'+dl+'s;--o:'+omax+'"></div>';
-    }
-    f.innerHTML=h; host.insertBefore(f, host.firstChild); return f;
-  }
-  fill(document.getElementById('scanner'));                 /* free audit / scanner panel */
-  var cta=document.querySelector('#cta .finalcta');
-  fill(cta);                                                /* final CTA: "YOUR MOVE / Ready to look expensive?" */
-  /* pricing intentionally has NO starzone — the skyline video shows through */
-
-  /* ---- comets / shooting stars: more frequent, varied angle · speed · length · glow ---- */
-  if(reduce) return;
-  var zones=Array.prototype.slice.call(document.querySelectorAll('.starzone'));
-  if(!zones.length) return;
-  function shoot(){
-    var host=zones[Math.floor(Math.random()*zones.length)];
-    if(!host) return;
-    var s=document.createElement('div'); s.className='shootingstar';
-    var len=(90+Math.random()*140).toFixed(0);              /* trail length 90–230px */
-    var ang=(12+Math.random()*30).toFixed(1);               /* angle 12–42deg */
-    var rad=ang*Math.PI/180;
-    var dist=(360+Math.random()*320);                       /* travel distance */
-    var tx=(dist*Math.cos(rad)).toFixed(0), ty=(dist*Math.sin(rad)).toFixed(0);
-    var dur=(0.9+Math.random()*1.1).toFixed(2);             /* speed varies */
-    s.style.position='absolute'; s.style.zIndex='0';
-    s.style.width=len+'px';
-    s.style.left=(Math.random()*64+2)+'%';
-    s.style.top=(Math.random()*46+2)+'%';
-    s.style.setProperty('--ang',ang+'deg');
-    s.style.setProperty('--tx',tx+'px');
-    s.style.setProperty('--ty',ty+'px');
-    s.style.animation='shoot '+dur+'s ease-out forwards';
-    host.appendChild(s);
-    setTimeout(function(){ if(s&&s.parentNode) s.parentNode.removeChild(s); }, dur*1000+150);
-  }
-  function loop(){
-    shoot();
-    if(Math.random()<0.35) setTimeout(shoot, 220+Math.random()*380);  /* occasional double */
-    setTimeout(loop, 1500+Math.random()*3000);                        /* more frequent */
-  }
-  setTimeout(loop, 1400);
 })();
 
 /* skyline bg video: respect data-saver / very slow networks (poster-only) */
