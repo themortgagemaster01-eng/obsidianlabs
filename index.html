@@ -1065,5 +1065,181 @@ function avaHear(){
 })();
 
 </script>
+<!-- ============================================================ -->
+<!-- AVA LIVE CHAT — drop-in upgrade for the Obsidian Labs site   -->
+<!-- Paste this ENTIRE block into index.html just before </body>, -->
+<!-- AFTER the existing inline <script> (it builds on QA/add/ask). -->
+<!-- Then set AVA_ENDPOINT below to the deployed Worker URL.      -->
+<!-- No secrets here — the backend runs on Cloudflare Workers AI. -->
+<!-- ============================================================ -->
+<style>
+  /* input row for the demo chat panel */
+  .ava-inrow{display:flex;gap:8px;margin-top:12px}
+  .ava-inrow input{flex:1;min-width:0;background:rgba(255,255,255,.05);border:1px solid var(--line,rgba(255,255,255,.14));border-radius:11px;padding:11px 13px;color:#eef1f6;font-family:inherit;font-size:13.5px;outline:none;transition:border-color .15s}
+  .ava-inrow input:focus{border-color:#cdd1db}
+  .ava-inrow input::placeholder{color:#7e8494}
+  .ava-inrow button{flex:none;background:linear-gradient(120deg,#f3f5f9,#b9bfcd);color:#0a0a0e;border:none;border-radius:11px;padding:11px 16px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .15s}
+  .ava-inrow button:hover{transform:translateY(-1px)}
+  .ava-inrow button:disabled{opacity:.55;cursor:default;transform:none}
+  /* compact live thread inside the corner popup */
+  .ava-pop-chat{display:none;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto;padding:0 16px 10px}
+  .ava-pop-chat .msg{max-width:88%;padding:9px 12px;border-radius:13px;font-size:13px;line-height:1.5;color:#e0e3ea;white-space:pre-wrap;word-wrap:break-word}
+  .ava-pop-chat .msg.user{align-self:flex-end;background:rgba(238,241,246,.14);border-bottom-right-radius:5px}
+  .ava-pop-chat .msg.ava{align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-bottom-left-radius:5px}
+  .ava-pop-inrow{display:flex;gap:7px;padding:0 16px 14px}
+  .ava-pop-inrow input{flex:1;min-width:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:9px 11px;color:#eef1f6;font-size:12.5px;outline:none}
+  .ava-pop-inrow input:focus{border-color:#cdd1db}
+  .ava-pop-inrow button{flex:none;background:linear-gradient(120deg,#f3f5f9,#b9bfcd);color:#0a0a0e;border:none;border-radius:10px;padding:9px 13px;font-weight:800;font-size:12px;cursor:pointer}
+  .ava-pop-inrow button:disabled{opacity:.55;cursor:default}
+</style>
+<script>
+(function(){
+  /* ================= CONFIG ================= */
+  var AVA_ENDPOINT = "https://ava-receptionist.themortgagemaster01.workers.dev"; // <-- change me after deploy
+  /* ========================================== */
+
+  var CHAT_URL = AVA_ENDPOINT.replace(/\/$/,"") + "/chat";
+  var LIVE = AVA_ENDPOINT.indexOf("YOUR-SUBDOMAIN") === -1; // scripted demo until configured
+  var history = []; // shared across panel + popup: {role, content}
+  var busy = false;
+
+  var OFFLINE_MSG = "I'm having a little trouble connecting right now — sorry about that! Please try again in a moment, or email hello@obsidianlabs.io and Robert will get right back to you.";
+
+  function scriptedAnswer(text){
+    if (typeof QA === "undefined") return null;
+    var t = text.toLowerCase();
+    for (var i=0;i<QA.length;i++){ if (QA[i].q.toLowerCase() === t) return QA[i].a; }
+    return null;
+  }
+
+  /* Stream a reply from the Worker into el (uses textContent — XSS-safe). */
+  function askAva(text, el, done){
+    history.push({role:"user", content:text});
+    fetch(CHAT_URL, {
+      method:"POST",
+      headers:{"content-type":"application/json"},
+      body: JSON.stringify({messages: history.slice(-12)})
+    }).then(function(res){
+      if(!res.ok || !res.body) throw new Error("bad response "+res.status);
+      var reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
+      var full = "";
+      el.textContent = "";
+      function pump(){
+        return reader.read().then(function(r){
+          if(r.done){
+            history.push({role:"assistant", content:full});
+            done && done(full);
+            return;
+          }
+          full += r.value;
+          el.textContent = full;
+          if (el.scrollIntoView) el.scrollIntoView({behavior:"smooth",block:"nearest"});
+          return pump();
+        });
+      }
+      return pump();
+    }).catch(function(err){
+      console.error("Ava live chat error:", err);
+      history.pop(); // drop the unanswered user turn
+      var canned = scriptedAnswer(text);
+      el.textContent = canned || OFFLINE_MSG;
+      done && done(el.textContent);
+    });
+  }
+
+  /* ---------- 1) Upgrade the demo chat panel (#chat / #sugg / ask) ---------- */
+  var chatEl = document.getElementById("chat");
+  if (chatEl && typeof add === "function") {
+
+    // add a real text input under the suggestion chips
+    var body = chatEl.closest(".ava-body") || chatEl.parentNode;
+    var row = document.createElement("form");
+    row.className = "ava-inrow";
+    row.innerHTML = '<input type="text" id="avaPanelIn" placeholder="Ask Ava anything…" maxlength="1000" autocomplete="off"><button type="submit" id="avaPanelSend">Send</button>';
+    body.appendChild(row);
+    var input = row.querySelector("#avaPanelIn");
+    var sendBtn = row.querySelector("#avaPanelSend");
+
+    function panelSend(text, cannedFallback){
+      if (busy || !text) return;
+      busy = true; sendBtn.disabled = true;
+      add("user", "");
+      chatEl.lastChild.textContent = text; // textContent, not innerHTML
+      var bubble = add("ava", '<span class="typing"><span></span><span></span><span></span></span>');
+      var finish = function(){ busy = false; sendBtn.disabled = false; };
+      if (LIVE) {
+        askAva(text, bubble, finish);
+      } else {
+        setTimeout(function(){
+          bubble.textContent = cannedFallback || scriptedAnswer(text) || "Great question! Leave your name and email and Robert will get right back to you.";
+          finish();
+        }, 900 + Math.random()*450);
+      }
+    }
+
+    // free-text input
+    row.addEventListener("submit", function(e){
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+      panelSend(text);
+    });
+
+    // route the existing suggestion chips through the live brain too
+    if (typeof window.ask === "function") {
+      window.ask = function(it){ panelSend(it.q, it.a); };
+    }
+  }
+
+  /* ---------- 2) Upgrade the corner popup to a mini live chat ---------- */
+  var pop = document.getElementById("avaPop");
+  if (pop) {
+    var thread = document.createElement("div");
+    thread.className = "ava-pop-chat";
+    thread.id = "avaPopChat";
+    var inrow = document.createElement("form");
+    inrow.className = "ava-pop-inrow";
+    inrow.innerHTML = '<input type="text" id="avaPopIn" placeholder="Type a message…" maxlength="1000" autocomplete="off"><button type="submit">Send</button>';
+    var cta = pop.querySelector(".ava-pop-cta");
+    pop.insertBefore(thread, cta);
+    pop.insertBefore(inrow, cta);
+
+    var popIn = inrow.querySelector("#avaPopIn");
+    var popBtn = inrow.querySelector("button");
+
+    function popAdd(cls, text){
+      thread.style.display = "flex";
+      var d = document.createElement("div");
+      d.className = "msg " + cls;
+      d.textContent = text;
+      thread.appendChild(d);
+      thread.scrollTop = thread.scrollHeight;
+      return d;
+    }
+
+    inrow.addEventListener("submit", function(e){
+      e.preventDefault();
+      var text = popIn.value.trim();
+      if (!text || busy) return;
+      popIn.value = "";
+      busy = true; popBtn.disabled = true;
+      popAdd("user", text);
+      var bubble = popAdd("ava", "…");
+      var finish = function(){ busy = false; popBtn.disabled = false; thread.scrollTop = thread.scrollHeight; };
+      if (LIVE) {
+        askAva(text, bubble, finish);
+      } else {
+        setTimeout(function(){
+          bubble.textContent = scriptedAnswer(text) || "Thanks! I'll be live very soon — meanwhile, grab the free audit below or email hello@obsidianlabs.io.";
+          finish();
+        }, 800);
+      }
+    });
+  }
+})();
+</script>
+<!-- ================== END AVA LIVE CHAT ================== -->
+
 </body>
 </html>
